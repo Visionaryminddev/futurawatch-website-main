@@ -15,7 +15,7 @@ export default function WatchPage() {
   const type = searchParams.get("type") || "movie"
 
   const [isPlaying, setIsPlaying] = useState(false)
-  const videoRef = useRef(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -28,9 +28,9 @@ export default function WatchPage() {
     }
   }
 
-  const handleVolume = (e) => {
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (videoRef.current) {
-      videoRef.current.volume = e.target.value
+      videoRef.current.volume = parseFloat(e.target.value)
     }
   }
 
@@ -38,17 +38,17 @@ export default function WatchPage() {
     if (videoRef.current) {
       if (videoRef.current.requestFullscreen) {
         videoRef.current.requestFullscreen()
-      } else if (videoRef.current.mozRequestFullScreen) {
-        videoRef.current.mozRequestFullScreen()
-      } else if (videoRef.current.webkitRequestFullscreen) {
-        videoRef.current.webkitRequestFullscreen()
-      } else if (videoRef.current.msRequestFullscreen) {
-        videoRef.current.msRequestFullscreen()
+      } else if ((videoRef.current as any).mozRequestFullScreen) {
+        (videoRef.current as any).mozRequestFullScreen()
+      } else if ((videoRef.current as any).webkitRequestFullscreen) {
+        (videoRef.current as any).webkitRequestFullscreen()
+      } else if ((videoRef.current as any).msRequestFullscreen) {
+        (videoRef.current as any).msRequestFullscreen()
       }
     }
   }
 
-  const handleRelatedContentClick = (id) => {
+  const handleRelatedContentClick = (id: number) => {
     router.push(`/watch?title=Related ${type} ${id}&type=${type}`)
   }
 

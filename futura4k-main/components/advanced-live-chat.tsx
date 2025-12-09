@@ -4,9 +4,16 @@ import { useState } from "react"
 import { MessageCircle, X, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+interface Message {
+  id: string
+  text: string
+  isBot: boolean
+  timestamp: Date
+}
+
 export function AdvancedLiveChat() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState("")
 
   const handleSendMessage = () => {

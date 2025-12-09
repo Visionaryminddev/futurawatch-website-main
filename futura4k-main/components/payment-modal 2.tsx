@@ -43,6 +43,12 @@ export function PaymentModal({ plan, onClose }: PaymentModalProps) {
     { id: "solana", name: "Solana", symbol: "SOL", address: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU" },
   ]
 
+  const giftCardSites = [
+    { name: "Amazon", url: "https://www.amazon.com/gift-cards" },
+    { name: "Target", url: "https://www.target.com/gift-cards" },
+    { name: "Walmart", url: "https://www.walmart.com/gift-cards" },
+  ]
+
   const handlePayment = () => {
     setIsProcessing(true)
     // Redirect to payment website
@@ -56,14 +62,6 @@ export function PaymentModal({ plan, onClose }: PaymentModalProps) {
       })
       onClose()
     }, 2000)
-  }
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    toast({
-      title: "Copied!",
-      description: "Address copied to clipboard",
-    })
   }
 
   const validateGiftCard = (code: string) => {

@@ -1141,10 +1141,7 @@ export default function BlogPage() {
           </div>
         </article>
       `
-    }
-  ]
-
-  const blogPosts = [
+    },
     {
       id: 5,
       title: t("blog.posts.sports.title"),

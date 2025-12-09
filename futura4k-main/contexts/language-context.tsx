@@ -7,6 +7,7 @@ type Language = "en" | "es" | "de" | "fr" | "it" | "nl"
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
+  isLoading?: boolean
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
