@@ -1,0 +1,643 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 45 93% 47%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbbf24;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+/* Line clamp utility */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+/* Google Translate customization */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-menu-value {
+  padding: 3px !important;
+}
+
+.goog-te-gadget-simple {
+  background-color: transparent !important;
+  border-left: 1px solid #d5d5d5;
+  border-top: 1px solid #9b9b9b;
+  border-bottom: 1px solid #e8e8e8;
+  border-right: 1px solid #d5d5d5;
+  font-size: 10pt !important;
+  display: inline-block;
+  padding-top: 1px !important;
+  padding-bottom: 2px !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+  zoom: 1;
+}
+
+.goog-te-menu-value span {
+  color: #fbbf24 !important;
+}
+
+.goog-te-menu-value span:hover {
+  color: #f59e0b !important;
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom button hover effects */
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #fbbf24;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile-first optimizations */
+@layer utilities {
+  /* Touch-friendly button sizing */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improved text readability on mobile */
+  .mobile-text-sm {
+    @apply text-sm leading-relaxed;
+  }
+
+  .mobile-text-base {
+    @apply text-base leading-relaxed;
+  }
+
+  .mobile-text-lg {
+    @apply text-lg leading-relaxed;
+  }
+
+  /* Better spacing for mobile */
+  .mobile-spacing {
+    @apply px-4 py-2;
+  }
+
+  .mobile-section-spacing {
+    @apply py-8 px-4;
+  }
+
+  /* Mobile-optimized grids */
+  .mobile-grid-2 {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+  }
+
+  .mobile-grid-3 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .mobile-grid-4 {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3;
+  }
+
+  /* Responsive font sizes */
+  .responsive-title {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight;
+  }
+
+  .responsive-subtitle {
+    @apply text-lg sm:text-xl md:text-2xl text-gray-400 leading-relaxed;
+  }
+
+  .responsive-text {
+    @apply text-sm sm:text-base leading-relaxed;
+  }
+
+  /* Better mobile cards */
+  .mobile-card {
+    @apply bg-gray-900 border-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
+  /* Mobile-friendly buttons */
+  .mobile-button {
+    @apply px-6 py-3 text-sm font-semibold rounded-lg transition-all duration-200 touch-target;
+  }
+
+  .mobile-button-lg {
+    @apply px-8 py-4 text-base font-semibold rounded-lg transition-all duration-200 touch-target;
+  }
+
+  /* Safe area for notched devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Improved touch interactions */
+  .touch-element {
+    @apply select-none active:scale-95 transition-transform duration-150;
+  }
+
+  /* Mobile-optimized layout */
+  .mobile-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Better focus states for mobile */
+  .mobile-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50;
+  }
+}
+
+/* Improve mobile scrolling */
+html {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Better mobile input styling */
+input, textarea, select {
+  @apply mobile-focus;
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
+/* Mobile-optimized animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode optimizations for mobile */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* Better mobile viewport handling */
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific styles */
+  .ios-safe-area {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Custom mobile scrollbar for better UX */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(251, 191, 36, 0.3);
+  }
+}
+
+/* Additional mobile optimizations for components */
+
+/* Modal and Dialog Mobile Optimization */
+.mobile-modal {
+  width: 95vw;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.mobile-dialog-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-dialog-content {
+    padding: 1.5rem;
+  }
+}
+
+.mobile-dialog-header {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .mobile-dialog-header {
+    font-size: 1.25rem;
+  }
+}
+
+/* Table Mobile Optimization */
+.mobile-table-container {
+  overflow-x: auto;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-table-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.mobile-table {
+  min-width: 100%;
+  font-size: 0.875rem;
+}
+
+.mobile-table th,
+.mobile-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .mobile-table th,
+  .mobile-table td {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Form Mobile Optimization */
+.mobile-form-group {
+  margin-bottom: 1rem;
+}
+
+.mobile-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #d1d5db;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-form-input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
+.mobile-form-input:focus {
+  border-color: #eab308;
+  box-shadow: 0 0 0 1px #eab308;
+  outline: none;
+}
+
+@media (min-width: 640px) {
+  .mobile-form-input {
+    padding: 0.875rem 1rem;
+  }
+}
+
+/* Navigation Mobile Optimization */
+.mobile-nav-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #d1d5db;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-item:hover {
+  color: #eab308;
+  background-color: #1f2937;
+}
+
+.mobile-nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #111827;
+  border-top: 1px solid #374151;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Video Player Mobile Optimization */
+.mobile-video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: black;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.mobile-video-player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Loading States Mobile */
+.mobile-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #eab308;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Search Mobile Optimization */
+.mobile-search-container {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.mobile-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  background-color: #111827;
+  border: 1px solid #374151;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
+.mobile-search-input:focus {
+  border-color: #eab308;
+  outline: none;
+  box-shadow: 0 0 0 1px #eab308;
+}
+
+.mobile-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Stats Mobile Layout */
+.mobile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.mobile-stat-card {
+  text-align: center;
+  padding: 1rem;
+  background-color: #111827;
+  border-radius: 0.5rem;
+  border: 1px solid #1f2937;
+}
+
+.mobile-stat-number {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #eab308;
+}
+
+@media (min-width: 640px) {
+  .mobile-stat-number {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-stat-number {
+    font-size: 1.875rem;
+  }
+}
+
+.mobile-stat-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-stat-label {
+    font-size: 0.875rem;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile for performance */
+  .hover\:scale-105:hover {
+    transform: scale(1.02) !important;
+  }
+
+  .hover\:scale-110:hover {
+    transform: scale(1.05) !important;
+  }
+
+  /* Better button press feedback */
+  button:active,
+  .touch-element:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  /* Prevent zoom on input focus in iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Better table mobile layout */
+  table {
+    font-size: 14px;
+  }
+
+  /* Better spacing for mobile grids */
+  .grid {
+    gap: 1rem;
+  }
+
+  /* Optimize image rendering on mobile */
+  img {
+    image-rendering: optimizeSpeed;
+  }
+
+  /* Improve modal positioning */
+  .fixed {
+    position: absolute;
+  }
+}
+
+/* Landscape orientation optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+  .mobile-container {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .responsive-title {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .responsive-subtitle {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* Accessibility improvements for mobile */
+@media (prefers-reduced-motion: reduce) {
+  .touch-element,
+  .mobile-button,
+  .mobile-card,
+  .mobile-button-lg {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Multilingual button support */
+.multilingual-button {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+/* Responsive button text */
+.responsive-button-text {
+  line-height: 1.3 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  text-align: center !important;
+}
