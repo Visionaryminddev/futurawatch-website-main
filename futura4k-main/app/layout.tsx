@@ -8,11 +8,13 @@ import { Toaster } from "@/components/ui/toaster"
 import { LanguageProvider } from "@/contexts/language-context"
 import { ErrorBoundary } from "@/components/error-boundary"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], display: "swap" })
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  colorScheme: "dark",
+  themeColor: "#000000",
 }
 
 export const metadata: Metadata = {
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  generator: 'v0.dev'
+  generator: 'v0.dev',
 }
 
 export default function RootLayout({
@@ -43,6 +45,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <meta httpEquiv="x-ua-compatible" content="IE=edge" />
       </head>
       <body className={`${inter.className} bg-black text-white antialiased`} suppressHydrationWarning>
         <ErrorBoundary>
