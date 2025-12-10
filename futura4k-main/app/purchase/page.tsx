@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Bitcoin, ExternalLink, Clock, Star, Check, Zap, ArrowLeft } from "lucide-react"
+import { Bitcoin, ExternalLink, Clock, Star, Check, Zap, ArrowLeft, CreditCard } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 
 interface Plan {
@@ -303,6 +303,62 @@ function PurchasePageContent() {
         {/* Footer */}
         <div className="mt-8 text-center text-gray-400 responsive-text">
           <p>{t('purchase.footer')}</p>
+        </div>
+
+        {/* Payment Method Logos */}
+        <div className="mt-12 pb-8">
+          <Card className="bg-gray-900 border-gray-700">
+            <CardContent className="p-6">
+              <h3 className="text-center text-gray-400 text-sm mb-6">Accepted Payment Methods</h3>
+              <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+                {/* Bitcoin */}
+                <div className="flex flex-col items-center group">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Bitcoin className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                  </div>
+                  <span className="text-xs text-gray-400 mt-2">Bitcoin</span>
+                </div>
+
+                {/* Ethereum */}
+                <div className="flex flex-col items-center group">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M11.944 17.97L4.58 13.62 11.943 24l7.37-10.38-7.372 4.35h.003zM12.056 0L4.69 12.223l7.365 4.354 7.365-4.35L12.056 0z"/>
+                    </svg>
+                  </div>
+                  <span className="text-xs text-gray-400 mt-2">Ethereum</span>
+                </div>
+
+                {/* Cardano */}
+                <div className="flex flex-col items-center group">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 14.709c-.153.344-.467.563-.819.563H7.257c-.352 0-.666-.22-.819-.563L4.15 9.291c-.153-.344-.153-.744 0-1.088l2.288-5.418C6.591 2.441 6.905 2.222 7.257 2.222h9.486c.352 0 .666.22.819.563l2.288 5.418c.153.344.153.744 0 1.088l-2.288 5.418z"/>
+                    </svg>
+                  </div>
+                  <span className="text-xs text-gray-400 mt-2">Cardano</span>
+                </div>
+
+                {/* Credit Card */}
+                <div className="flex flex-col items-center group">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-gray-600 to-gray-700 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <CreditCard className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                  </div>
+                  <span className="text-xs text-gray-400 mt-2">Credit Card</span>
+                </div>
+
+                {/* PayPal */}
+                <div className="flex flex-col items-center group">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.76-4.852a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.746-4.46z"/>
+                    </svg>
+                  </div>
+                  <span className="text-xs text-gray-400 mt-2">PayPal</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
