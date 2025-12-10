@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, CreditCard, Lock, Check, Shield } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 import { useToast } from "@/hooks/use-toast"
@@ -19,11 +20,13 @@ type Plan = {
 function PaymentRedirectContent() {
   const [plan, setPlan] = useState<Plan | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState("card")
   const [cardNumber, setCardNumber] = useState("")
   const [expiryDate, setExpiryDate] = useState("")
   const [cvv, setCvv] = useState("")
   const [cardholderName, setCardholderName] = useState("")
   const [email, setEmail] = useState("")
+  const [paypalEmail, setPaypalEmail] = useState("")
   const router = useRouter()
   const searchParams = useSearchParams()
   const t = useTranslate()
@@ -88,13 +91,24 @@ function PaymentRedirectContent() {
   const handleSubmitPayment = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!cardNumber || !expiryDate || !cvv || !cardholderName || !email) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all payment details",
-        variant: "destructive"
-      })
-      return
+    if (paymentMethod === "card") {
+      if (!cardNumber || !expiryDate || !cvv || !cardholderName || !email) {
+        toast({
+          title: "Missing Information",
+          description: "Please fill in all payment details",
+          variant: "destructive"
+        })
+        return
+      }
+    } else if (paymentMethod === "paypal") {
+      if (!paypalEmail) {
+        toast({
+          title: "Missing Information",
+          description: "Please enter your PayPal email",
+          variant: "destructive"
+        })
+        return
+      }
     }
 
     setIsProcessing(true)
@@ -152,110 +166,174 @@ function PaymentRedirectContent() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmitPayment} className="space-y-6">
-                  {/* Email */}
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="bg-gray-800 border-gray-600 text-white"
-                      required
-                    />
-                    <p className="text-xs text-gray-400">Receipt will be sent to this email</p>
-                  </div>
+                <Tabs value={paymentMethod} onValueChange={setPaymentMethod} className="w-full">
+                  <TabsList className="grid w-full grid-cols-2 mb-6">
+                    <TabsTrigger value="card">Credit Card</TabsTrigger>
+                    <TabsTrigger value="paypal">PayPal</TabsTrigger>
+                  </TabsList>
 
-                  {/* Card Information */}
-                  <div className="space-y-4">
-                    <Label>Card Information</Label>
-                    
-                    {/* Card Number */}
-                    <div className="relative">
-                      <Input
-                        type="text"
-                        placeholder="1234 5678 9012 3456"
-                        value={cardNumber}
-                        onChange={handleCardNumberChange}
-                        className="bg-gray-800 border-gray-600 text-white pr-12"
-                        required
-                      />
-                      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
-                        <div className="w-8 h-5 bg-gradient-to-r from-blue-600 to-blue-400 rounded"></div>
+                  {/* Credit Card Tab */}
+                  <TabsContent value="card">
+                    <form onSubmit={handleSubmitPayment} className="space-y-6">
+                      {/* Email */}
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="your@email.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="bg-gray-800 border-gray-600 text-white"
+                          required
+                        />
+                        <p className="text-xs text-gray-400">Receipt will be sent to this email</p>
                       </div>
-                    </div>
 
-                    {/* Expiry and CVV */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <Input
-                        type="text"
-                        placeholder="MM/YY"
-                        value={expiryDate}
-                        onChange={handleExpiryChange}
-                        className="bg-gray-800 border-gray-600 text-white"
-                        required
-                      />
-                      <Input
-                        type="text"
-                        placeholder="CVV"
-                        value={cvv}
-                        onChange={handleCvvChange}
-                        className="bg-gray-800 border-gray-600 text-white"
-                        required
-                      />
-                    </div>
-                  </div>
+                      {/* Card Information */}
+                      <div className="space-y-4">
+                        <Label>Card Information</Label>
+                        
+                        {/* Card Number */}
+                        <div className="relative">
+                          <Input
+                            type="text"
+                            placeholder="1234 5678 9012 3456"
+                            value={cardNumber}
+                            onChange={handleCardNumberChange}
+                            className="bg-gray-800 border-gray-600 text-white pr-12"
+                            required
+                          />
+                          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
+                            <div className="w-8 h-5 bg-gradient-to-r from-blue-600 to-blue-400 rounded"></div>
+                          </div>
+                        </div>
 
-                  {/* Cardholder Name */}
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Cardholder Name</Label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="John Doe"
-                      value={cardholderName}
-                      onChange={(e) => setCardholderName(e.target.value)}
-                      className="bg-gray-800 border-gray-600 text-white"
-                      required
-                    />
-                  </div>
-
-                  {/* Security Notice */}
-                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                    <div className="flex items-start gap-3">
-                      <Shield className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                      <div className="text-sm text-gray-300">
-                        <p className="font-semibold text-blue-400 mb-1">Secure Payment</p>
-                        <p>Your payment information is encrypted and secure. We use industry-standard SSL encryption.</p>
+                        {/* Expiry and CVV */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <Input
+                            type="text"
+                            placeholder="MM/YY"
+                            value={expiryDate}
+                            onChange={handleExpiryChange}
+                            className="bg-gray-800 border-gray-600 text-white"
+                            required
+                          />
+                          <Input
+                            type="text"
+                            placeholder="CVV"
+                            value={cvv}
+                            onChange={handleCvvChange}
+                            className="bg-gray-800 border-gray-600 text-white"
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    disabled={isProcessing}
-                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-6 text-lg"
-                  >
-                    {isProcessing ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-2"></div>
-                        Processing Payment...
-                      </>
-                    ) : (
-                      <>
-                        <Lock className="w-5 h-5 mr-2" />
-                        Pay {plan?.price}
-                      </>
-                    )}
-                  </Button>
+                      {/* Cardholder Name */}
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Cardholder Name</Label>
+                        <Input
+                          id="name"
+                          type="text"
+                          placeholder="John Doe"
+                          value={cardholderName}
+                          onChange={(e) => setCardholderName(e.target.value)}
+                          className="bg-gray-800 border-gray-600 text-white"
+                          required
+                        />
+                      </div>
 
-                  <p className="text-xs text-center text-gray-400">
-                    By confirming your payment, you agree to our terms of service
-                  </p>
-                </form>
+                      {/* Security Notice */}
+                      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                        <div className="flex items-start gap-3">
+                          <Shield className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <div className="text-sm text-gray-300">
+                            <p className="font-semibold text-blue-400 mb-1">Secure Payment</p>
+                            <p>Your payment information is encrypted and secure. We use industry-standard SSL encryption.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Submit Button */}
+                      <Button
+                        type="submit"
+                        disabled={isProcessing}
+                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-6 text-lg"
+                      >
+                        {isProcessing ? (
+                          <>
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-2"></div>
+                            Processing Payment...
+                          </>
+                        ) : (
+                          <>
+                            <Lock className="w-5 h-5 mr-2" />
+                            Pay {plan?.price}
+                          </>
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-center text-gray-400">
+                        By confirming your payment, you agree to our terms of service
+                      </p>
+                    </form>
+                  </TabsContent>
+
+                  {/* PayPal Tab */}
+                  <TabsContent value="paypal">
+                    <form onSubmit={handleSubmitPayment} className="space-y-6">
+                      {/* PayPal Email */}
+                      <div className="space-y-2">
+                        <Label htmlFor="paypal-email">PayPal Email Address</Label>
+                        <Input
+                          id="paypal-email"
+                          type="email"
+                          placeholder="your@paypal.com"
+                          value={paypalEmail}
+                          onChange={(e) => setPaypalEmail(e.target.value)}
+                          className="bg-gray-800 border-gray-600 text-white"
+                          required
+                        />
+                        <p className="text-xs text-gray-400">You will be redirected to PayPal to complete your payment</p>
+                      </div>
+
+                      {/* PayPal Info */}
+                      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                        <div className="flex items-start gap-3">
+                          <Shield className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                          <div className="text-sm text-gray-300">
+                            <p className="font-semibold text-blue-400 mb-1">Secure PayPal Payment</p>
+                            <p>You will be securely redirected to PayPal to authorize the payment of {plan?.price}.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Submit Button */}
+                      <Button
+                        type="submit"
+                        disabled={isProcessing}
+                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-6 text-lg"
+                      >
+                        {isProcessing ? (
+                          <>
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-2"></div>
+                            Processing Payment...
+                          </>
+                        ) : (
+                          <>
+                            <Lock className="w-5 h-5 mr-2" />
+                            Continue to PayPal
+                          </>
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-center text-gray-400">
+                        By confirming your payment, you agree to our terms of service
+                      </p>
+                    </form>
+                  </TabsContent>
+                </Tabs>
               </CardContent>
             </Card>
           </div>
