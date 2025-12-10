@@ -100,24 +100,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Mobile-Optimized Sliding Text Banner */}
-      <section className="bg-gradient-to-r from-yellow-500 to-yellow-600 py-3 sm:py-4">
-        <div className="mobile-container">
-          <div className="text-center">
-            <SlidingText
-              texts={[
-                "📺 23K+ Channels",
-                "⚡ 4K & 8K Quality",
-                "🌍 Worldwide",
-                "💯 99.9% Uptime"
-              ]}
-              className="text-black font-bold text-sm sm:text-base md:text-lg lg:text-xl"
-              speed={2500}
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Sports Slider */}
       <SportsSlider />
 
