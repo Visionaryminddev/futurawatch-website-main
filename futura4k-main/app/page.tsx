@@ -106,9 +106,7 @@ export default function HomePage() {
           <div className="text-center">
             <SlidingText
               texts={[
-                "🏆 UEFA WK & EK LIVE NOW!",
                 "📺 23K+ Channels",
-                "🎬 130K+ Movies",
                 "⚡ 4K & 8K Quality",
                 "🌍 Worldwide",
                 "💯 99.9% Uptime"

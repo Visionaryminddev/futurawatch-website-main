@@ -454,13 +454,13 @@ export default {
   // Reseller Testimonials
   "reseller.testimonials.alex.name": "Alex M.",
   "reseller.testimonials.alex.role": "Revendeur IPTV",
-  "reseller.testimonials.alex.content": "J'ai commencé avec 5 points et je gère maintenant 200+ clients. Le tableau de bord rend tout si facile!",
+  "reseller.testimonials.alex.content": "J'ai commencé avec 12 amis, maintenant 140 clients payants. Les paiements hebdo arrivent à l'heure et le support répond en minutes.",
   "reseller.testimonials.sarah.name": "Sarah K.",
   "reseller.testimonials.sarah.role": "Propriétaire d'Entreprise",
-  "reseller.testimonials.sarah.content": "Meilleure décision que j'ai prise cette année. Les marges bénéficiaires sont incroyables et le support est fantastique.",
+  "reseller.testimonials.sarah.content": "J'ai ajouté l'IPTV à ma boutique d'électronique. Le portail revendeur rend factures et renouvellements simples.",
   "reseller.testimonials.mike.name": "Mike R.",
   "reseller.testimonials.mike.role": "Entrepreneur",
-  "reseller.testimonials.mike.content": "De zéro à €3000/mois en seulement 6 mois. Le programme de revendeur a changé ma vie!",
+  "reseller.testimonials.mike.content": "En 2 jours j'ai maîtrisé le tableau de bord; ça paie mon loyer. Les réinitialisations automatiques me font gagner des heures.",
 
   // Reseller Page Sections
   "reseller.sections.benefits.title": "Pourquoi Choisir Notre",

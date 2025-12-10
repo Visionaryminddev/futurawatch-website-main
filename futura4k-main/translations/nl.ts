@@ -503,13 +503,13 @@ export default {
   // Reseller Testimonials
   "reseller.testimonials.alex.name": "Alex M.",
   "reseller.testimonials.alex.role": "IPTV Wederverkoper",
-  "reseller.testimonials.alex.content": "Begonnen met 5 punten en beheer nu 200+ klanten. Het dashboard maakt alles zo eenvoudig!",
+  "reseller.testimonials.alex.content": "Begonnen met 12 vrienden, nu 140 betalende klanten. Wekelijkse uitbetalingen komen op tijd en support reageert binnen minuten.",
   "reseller.testimonials.sarah.name": "Sarah K.",
   "reseller.testimonials.sarah.role": "Bedrijfseigenaar",
-  "reseller.testimonials.sarah.content": "Beste beslissing die ik dit jaar heb genomen. De winstmarges zijn ongelofelijk en ondersteuning is geweldig.",
+  "reseller.testimonials.sarah.content": "Ik heb IPTV toegevoegd naast mijn elektronicawinkel. Het wederverkoperportaal maakt facturen en verlengingen makkelijk.",
   "reseller.testimonials.mike.name": "Mike R.",
   "reseller.testimonials.mike.role": "Ondernemer",
-  "reseller.testimonials.mike.content": "Van nul naar €3000/maand in slechts 6 maanden. Het wederverkopersprogramma veranderde mijn leven!",
+  "reseller.testimonials.mike.content": "Na 2 dagen het dashboard leren, betaalt het mijn huur. Automatische account-resets besparen me uren.",
 
   // New Reseller
   "reseller.newReseller.title": "Start je IPTV Bedrijf",

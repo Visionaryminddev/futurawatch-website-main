@@ -449,13 +449,13 @@ export default {
   // Reseller Testimonials
   "reseller.testimonials.alex.name": "Alex M.",
   "reseller.testimonials.alex.role": "IPTV-Wiederverkäufer",
-  "reseller.testimonials.alex.content": "Begann mit 5 Punkten und verwalte jetzt 200+ Kunden. Das Dashboard macht alles so einfach!",
+  "reseller.testimonials.alex.content": "Startete mit 12 Freunden, jetzt 140 zahlende Kunden. Wöchentliche Auszahlungen kommen pünktlich und der Support antwortet in Minuten.",
   "reseller.testimonials.sarah.name": "Sarah K.",
   "reseller.testimonials.sarah.role": "Geschäftsinhaberin",
-  "reseller.testimonials.sarah.content": "Beste Entscheidung, die ich dieses Jahr getroffen habe. Die Gewinnmargen sind unglaublich und der Support ist fantastisch.",
+  "reseller.testimonials.sarah.content": "Ich habe IPTV zu meinem Elektronikladen hinzugefügt. Das Reseller-Portal macht Rechnungen und Verlängerungen einfach.",
   "reseller.testimonials.mike.name": "Mike R.",
   "reseller.testimonials.mike.role": "Unternehmer",
-  "reseller.testimonials.mike.content": "Von null auf €3000/Monat in nur 6 Monaten. Das Wiederverkäuferprogramm hat mein Leben verändert!",
+  "reseller.testimonials.mike.content": "In 2 Tagen das Dashboard gelernt; jetzt zahlt es meine Miete. Automatische Account-Resets sparen Stunden.",
 
   "reseller.newReseller.title": "Starten Sie Ihr IPTV-Geschäft",
   "reseller.newReseller.email": "E-Mail-Adresse",

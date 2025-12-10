@@ -396,6 +396,16 @@ export default {
   "reseller.sections.testimonials.title": "Success",
   "reseller.sections.testimonials.titleHighlight": "Stories",
   "reseller.sections.testimonials.subtitle": "Hear from our successful resellers who are building profitable businesses",
+
+  "reseller.testimonials.alex.name": "Alex M.",
+  "reseller.testimonials.alex.role": "IPTV Reseller",
+  "reseller.testimonials.alex.content": "Started with 12 friends, now 140 paying customers. Weekly payouts land on time and support answers within minutes.",
+  "reseller.testimonials.sarah.name": "Sarah K.",
+  "reseller.testimonials.sarah.role": "Small business owner",
+  "reseller.testimonials.sarah.content": "Added IPTV alongside my electronics shop. The reseller portal makes invoices and renewals easy.",
+  "reseller.testimonials.mike.name": "Mike R.",
+  "reseller.testimonials.mike.role": "Side-hustle marketer",
+  "reseller.testimonials.mike.content": "Took 2 days to learn the dashboard; now this covers my rent. Automated account resets save me hours.",
   
   "reseller.sections.cta.title": "Ready to Start Your",
   "reseller.sections.cta.titleHighlight": "IPTV Empire?",
