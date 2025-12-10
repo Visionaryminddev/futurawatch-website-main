@@ -72,13 +72,13 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
         
         <div className="relative z-20 text-center mobile-container max-w-4xl">
-          <Badge className="mb-4 sm:mb-6 bg-red-600/90 text-white border-red-500/30 text-sm sm:text-lg md:text-xl px-3 sm:px-4 md:px-6 py-2 sm:py-2 md:py-3 font-bold animate-pulse">
-            🏆 UEFA WK & EK LIVE NOW!
+          <Badge className="mb-4 sm:mb-6 bg-yellow-500/20 text-yellow-500 border-yellow-500/30 text-sm sm:text-lg md:text-xl px-3 sm:px-4 md:px-6 py-2 sm:py-2 md:py-3 font-bold animate-pulse">
+            ⭐ #1 IPTV Provider Worldwide
           </Badge>
           <h1 className="responsive-title mb-4 sm:mb-6 bg-gradient-to-r from-yellow-500 to-yellow-300 bg-clip-text text-transparent">
-            {translate("hero.title")}
+            Premium Ultra HD 4K & 8K Streaming
           </h1>
-          <p className="responsive-subtitle mb-6 sm:mb-8 text-gray-300 max-w-3xl mx-auto">{translate("hero.subtitle")}</p>
+          <p className="responsive-subtitle mb-6 sm:mb-8 text-gray-300 max-w-3xl mx-auto">Experience the world's #1 IPTV service with 23,000+ live channels and 130,000+ movies in stunning 4K & 8K quality</p>
           <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row justify-center items-center w-full">
             <Button
               size="lg"
@@ -99,9 +99,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Sports Slider */}
-      <SportsSlider />
 
       {/* Stats Section */}
       <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-black to-gray-900">
