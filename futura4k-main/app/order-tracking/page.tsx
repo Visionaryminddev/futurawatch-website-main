@@ -244,7 +244,7 @@ export default function OrderTrackingPage() {
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <p className="responsive-text text-gray-300">
-                Can't find your order or need assistance? Our support team is here to help you 24/7.
+                Can&apos;t find your order or need assistance? Our support team is here to help you 24/7.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 

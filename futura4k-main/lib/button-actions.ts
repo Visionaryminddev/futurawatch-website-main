@@ -50,7 +50,7 @@ export const buttonActions = {
     return true
   },
 
-  playContent: (item: any) => {
+  playContent: (item: { title: string; youtubeUrl?: string; type?: string }) => {
     if (item.youtubeUrl) {
       window.open(item.youtubeUrl, "_blank")
       toast({
@@ -77,7 +77,7 @@ export const buttonActions = {
   },
 
   // Form submission
-  submitForm: (formData: any, formType: string) => {
+  submitForm: (formData: Record<string, unknown>, formType: string) => {
     console.log(`Submitting ${formType} form:`, formData)
     toast({
       title: "Form Submitted",

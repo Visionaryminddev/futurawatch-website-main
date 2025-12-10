@@ -7,8 +7,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ExternalLink, ArrowLeft, MessageCircle, Clock, Shield, Users, Check, Copy } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 
+type Plan = {
+  name: string
+  price: string
+  duration: string
+}
+
 function PaymentRedirectContent() {
-  const [plan, setPlan] = useState<any>(null)
+  const [plan, setPlan] = useState<Plan | null>(null)
   const [copied, setCopied] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()

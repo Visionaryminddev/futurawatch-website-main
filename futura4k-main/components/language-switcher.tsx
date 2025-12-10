@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Check, ChevronDown, Globe } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
+import { useLanguage, type Language } from "@/contexts/language-context"
 
 const languages = [
   { code: "en", name: "English", flag: "🇬🇧" },
@@ -20,8 +20,8 @@ export function LanguageSwitcher() {
 
   const currentLanguage = languages.find((lang) => lang.code === language) || languages[0]
 
-  const handleLanguageChange = (langCode: string) => {
-    setLanguage(langCode as any)
+  const handleLanguageChange = (langCode: Language) => {
+    setLanguage(langCode)
     setIsOpen(false)
   }
 

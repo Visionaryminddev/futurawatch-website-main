@@ -109,7 +109,7 @@ export function PaymentModal({ plan, onClose }: PaymentModalProps) {
                 
                 {/* Features */}
                 <div className="mt-6 space-y-3">
-                  <h4 className="font-semibold text-yellow-500">What's Included:</h4>
+                  <h4 className="font-semibold text-yellow-500">What&apos;s Included:</h4>
                   <div className="space-y-2 text-sm text-gray-300">
                     <div className="flex items-center">
                       <Check className="w-4 h-4 text-green-500 mr-2" />
@@ -303,7 +303,7 @@ export function PaymentModal({ plan, onClose }: PaymentModalProps) {
                       <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4">
                         <h4 className="font-semibold text-blue-400 mb-2">Important:</h4>
                         <p className="text-sm text-gray-300">
-                          Please send as "Friends & Family" to avoid fees and ensure proper processing.
+                          Please send as &quot;Friends &amp; Family&quot; to avoid fees and ensure proper processing.
                         </p>
                       </div>
                     </div>

@@ -8,6 +8,12 @@ import { Play, Pause, Maximize, ArrowLeft, Star } from "lucide-react"
 import Link from "next/link"
 import { useState, useRef } from "react"
 
+type FullscreenVideo = HTMLVideoElement & {
+  mozRequestFullScreen?: () => Promise<void> | void
+  webkitRequestFullscreen?: () => Promise<void> | void
+  msRequestFullscreen?: () => Promise<void> | void
+}
+
 export default function WatchPage() {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -35,15 +41,16 @@ export default function WatchPage() {
   }
 
   const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen()
-      } else if ((videoRef.current as any).mozRequestFullScreen) {
-        (videoRef.current as any).mozRequestFullScreen()
-      } else if ((videoRef.current as any).webkitRequestFullscreen) {
-        (videoRef.current as any).webkitRequestFullscreen()
-      } else if ((videoRef.current as any).msRequestFullscreen) {
-        (videoRef.current as any).msRequestFullscreen()
+    const videoEl = videoRef.current as FullscreenVideo | null
+    if (videoEl) {
+      if (videoEl.requestFullscreen) {
+        videoEl.requestFullscreen()
+      } else if (videoEl.mozRequestFullScreen) {
+        videoEl.mozRequestFullScreen()
+      } else if (videoEl.webkitRequestFullscreen) {
+        videoEl.webkitRequestFullscreen()
+      } else if (videoEl.msRequestFullscreen) {
+        videoEl.msRequestFullscreen()
       }
     }
   }

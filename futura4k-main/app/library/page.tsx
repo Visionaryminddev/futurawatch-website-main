@@ -275,12 +275,22 @@ export default function LibraryPage() {
     "Adventure",
   ]
 
-  const [content, setContent] = useState([...movies, ...series])
-  const [visibleContent, setVisibleContent] = useState(content.slice(0, 8))
+  type MediaItem = {
+    id: string
+    title: string
+    genre: string
+    platform: string
+    youtubeUrl?: string
+    description?: string
+    poster?: string
+  }
+
+  const [content, setContent] = useState<MediaItem[]>([...movies, ...series])
+  const [visibleContent, setVisibleContent] = useState<MediaItem[]>(content.slice(0, 8))
   const [loading, setLoading] = useState(false)
 
-  const filteredContent = (content: any[]) => {
-    return content.filter((item) => {
+  const filteredContent = (items: MediaItem[]) => {
+    return items.filter((item) => {
       const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase())
       const matchesGenre = selectedGenre === "all" || item.genre === selectedGenre
       const matchesPlatform = selectedPlatform === "all" || item.platform === selectedPlatform
@@ -288,7 +298,7 @@ export default function LibraryPage() {
     })
   }
 
-  const handlePlay = (item: any) => {
+  const handlePlay = (item: MediaItem) => {
     if (item.youtubeUrl) {
       window.open(item.youtubeUrl, "_blank")
       toast({

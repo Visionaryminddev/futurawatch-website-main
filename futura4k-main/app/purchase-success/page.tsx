@@ -84,7 +84,7 @@ export default function PurchaseSuccessPage() {
               <CardHeader>
                 <CardTitle className="text-yellow-500 flex items-center responsive-subtitle">
                   <ArrowRight className="w-5 h-5 mr-2" />
-                  What's Next?
+                  What&apos;s Next?
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -143,7 +143,7 @@ export default function PurchaseSuccessPage() {
           {/* Auto Redirect Notice */}
           <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-700">
             <p className="responsive-text text-gray-400">
-              You'll be automatically redirected to the homepage in <span className="text-yellow-500 font-semibold">{countdown}</span> seconds
+              You&apos;ll be automatically redirected to the homepage in <span className="text-yellow-500 font-semibold">{countdown}</span> seconds
             </p>
           </div>
 

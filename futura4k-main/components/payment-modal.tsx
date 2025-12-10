@@ -97,7 +97,7 @@ export function PaymentModal({ plan, onClose }: PaymentModalProps) {
                 
                 {/* Features */}
                 <div className="mt-6 space-y-4">
-                  <h4 className="font-semibold text-yellow-500 text-lg">What's Included:</h4>
+                  <h4 className="font-semibold text-yellow-500 text-lg">What&apos;s Included:</h4>
                   <div className="space-y-3 text-sm text-gray-300">
                     <div className="flex items-center">
                       <Check className="w-4 h-4 text-green-500 mr-3" />
