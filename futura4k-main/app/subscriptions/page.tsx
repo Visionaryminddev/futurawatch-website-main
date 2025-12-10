@@ -1,11 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Check, Star, Clock, CreditCard, Gift, Bitcoin } from "lucide-react"
+import { Check, Star, Clock, CreditCard, Bitcoin } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 
 interface Plan {
@@ -195,24 +194,19 @@ export default function SubscriptionsPage() {
           ))}
         </div>
 
-        {/* Payment Methods Info */}
+        {/* Payment Methods Info (gift cards removed; Stripe primary) */}
         <div className="mobile-card bg-gray-900 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-2xl font-bold text-yellow-500 mb-4 sm:mb-6 text-center">{t("subscriptions.paymentMethods")}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="text-center">
               <Bitcoin className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-yellow-500 mx-auto mb-2 sm:mb-4" />
               <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">{t("subscriptions.payment.crypto")}</h3>
               <p className="text-gray-400 text-xs sm:text-sm">{t("subscriptions.payment.cryptoOptions")}</p>
             </div>
             <div className="text-center">
-              <Gift className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-yellow-500 mx-auto mb-2 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">{t("subscriptions.payment.giftCards")}</h3>
-              <p className="text-gray-400 text-xs sm:text-sm">{t("subscriptions.payment.giftCardsOptions")}</p>
-            </div>
-            <div className="text-center">
               <CreditCard className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-yellow-500 mx-auto mb-2 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">{t("subscriptions.payment.paypal")}</h3>
-              <p className="text-gray-400 text-xs sm:text-sm">{t("subscriptions.payment.paypalOptions")}</p>
+              <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Stripe</h3>
+              <p className="text-gray-400 text-xs sm:text-sm">Visa, Mastercard, Apple Pay via secure Stripe checkout.</p>
             </div>
           </div>
         </div>

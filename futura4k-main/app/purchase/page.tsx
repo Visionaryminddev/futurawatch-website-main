@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Bitcoin, ExternalLink, Clock, Star, Check, Zap, CreditCard, Gift, Users, ArrowLeft } from "lucide-react"
+import { Bitcoin, ExternalLink, Clock, Star, Check, Zap, ArrowLeft } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 
 interface Plan {
@@ -262,113 +262,35 @@ function PurchasePageContent() {
                   </div>
                 </CardContent>
               </Card>
-
-              {/* PayPal Friends & Family */}
-              <Card className="mobile-card bg-gray-800 border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 min-h-[400px] flex flex-col">
+              {/* Stripe Checkout (cards & PayPal handled by Stripe) */}
+              <Card className="mobile-card bg-gray-800 border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20 min-h-[400px] flex flex-col">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-blue-500 flex items-center responsive-subtitle">
-                    <Users className="w-6 h-6 mr-2" />
-                    {t('purchase.paypal.title')}
+                  <CardTitle className="text-yellow-500 flex items-center responsive-subtitle">
+                    <span className="w-6 h-6 mr-2 inline-flex items-center justify-center rounded-full bg-yellow-500/20 text-yellow-500 font-bold">S</span>
+                    Stripe Checkout
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col p-4">
                   <div className="space-y-4 flex-1">
                     <p className="text-gray-300 responsive-text mb-4">
-                      {t('purchase.paypal.description')}
+                      Secure payments via Stripe for credit/debit cards, Apple Pay, Google Pay, and PayPal (when enabled).
                     </p>
                     <div className="bg-gray-700 rounded-lg p-4 text-center">
                       <div className="mb-4">
-                        <Users className="w-8 h-8 text-blue-500 mx-auto mb-2" />
-                        <p className="text-white font-semibold responsive-text">Friends & Family</p>
-                        <p className="text-gray-400 text-xs">Personal Payment Only</p>
+                        <p className="text-white font-semibold responsive-text">Stripe Hosted Checkout</p>
+                        <p className="text-gray-400 text-xs">PCI-compliant, 3D Secure ready</p>
                       </div>
                       <Button
                         onClick={handlePaymentRedirect}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium mobile-button touch-element multilingual-button"
+                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-medium mobile-button touch-element multilingual-button"
                       >
                         <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <span className="responsive-button-text">{t('purchase.paypal.payNow')}</span>
+                        <span className="responsive-button-text">Proceed to Stripe</span>
                       </Button>
                     </div>
-                    <div className="p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg">
-                      <p className="text-xs text-orange-400 font-medium">
-                        {t('purchase.paypal.note')}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Gift Cards */}
-              <Card className="mobile-card bg-gray-800 border-gray-700 hover:border-green-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20 min-h-[400px] flex flex-col">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-green-500 flex items-center responsive-subtitle">
-                    <Gift className="w-6 h-6 mr-2" />
-                    {t('purchase.giftCards.title')}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col p-4">
-                  <div className="space-y-4 flex-1">
-                    <p className="text-gray-300 responsive-text mb-4">
-                      {t('purchase.giftCards.description')}
-                    </p>
-                    <div className="space-y-2">
-                      {["Amazon", "Google Play", "Apple", "Steam"].map((card) => (
-                        <div key={card} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
-                          <div className="flex items-center">
-                            <Gift className="w-4 h-4 mr-3 text-green-500 flex-shrink-0" />
-                            <span className="text-white responsive-text font-medium">{card}</span>
-                          </div>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={handlePaymentRedirect}
-                            className="border-green-500/50 text-green-500 hover:bg-green-500 hover:text-black px-3 py-1 text-xs touch-element multilingual-button"
-                          >
-                            <span className="responsive-button-text">{t('purchase.giftCards.useNow')}</span>
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
-                      <p className="text-xs text-green-400 font-medium">
-                        {t('purchase.giftCards.note')}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Credit Card */}
-              <Card className="mobile-card bg-gray-800 border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 min-h-[400px] flex flex-col">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-purple-500 flex items-center responsive-subtitle">
-                    <CreditCard className="w-6 h-6 mr-2" />
-                    {t('purchase.cards.title')}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col p-4">
-                  <div className="space-y-4 flex-1">
-                    <p className="text-gray-300 responsive-text mb-4">
-                      {t('purchase.cards.description')}
-                    </p>
-                    <div className="bg-gray-700 rounded-lg p-4 text-center">
-                      <div className="mb-4">
-                        <CreditCard className="w-8 h-8 text-purple-500 mx-auto mb-2" />
-                        <p className="text-white font-semibold responsive-text">Visa & Mastercard</p>
-                        <p className="text-gray-400 text-xs">Instant Processing</p>
-                      </div>
-                      <Button
-                        onClick={handlePaymentRedirect}
-                        className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium mobile-button touch-element multilingual-button"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <span className="responsive-button-text">{t('purchase.cards.payNow')}</span>
-                      </Button>
-                    </div>
-                    <div className="p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-                      <p className="text-xs text-purple-400 font-medium">
-                        {t('purchase.cards.note')}
+                    <div className="p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                      <p className="text-xs text-yellow-400 font-medium">
+                        Payments are processed securely via Stripe. No gift cards accepted.
                       </p>
                     </div>
                   </div>
