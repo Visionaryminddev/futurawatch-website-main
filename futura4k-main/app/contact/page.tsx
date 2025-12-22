@@ -28,12 +28,51 @@ export default function ContactPage() {
     setIsLoading(true)
     
     try {
+      // Client-side validation
+      if (!formData.fullName.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
+        toast({
+          title: "Validation Error",
+          description: "Please fill in all fields.",
+          variant: "destructive",
+        })
+        setIsLoading(false)
+        return
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email.trim())) {
+        toast({
+          title: "Invalid Email",
+          description: "Please enter a valid email address.",
+          variant: "destructive",
+        })
+        setIsLoading(false)
+        return
+      }
+
+      // Message length validation
+      if (formData.message.trim().length < 10) {
+        toast({
+          title: "Message Too Short",
+          description: "Please provide a more detailed message (at least 10 characters).",
+          variant: "destructive",
+        })
+        setIsLoading(false)
+        return
+      }
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          fullName: formData.fullName.trim(),
+          email: formData.email.trim().toLowerCase(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+        }),
       })
 
       const data = await response.json()
@@ -43,8 +82,8 @@ export default function ContactPage() {
       }
 
       toast({
-        title: "Message Sent Successfully!",
-        description: "We've received your message and will get back to you soon.",
+        title: "✅ Message Sent Successfully!",
+        description: "We've received your message and will get back to you soon via email.",
       })
 
       // Reset form
@@ -55,8 +94,9 @@ export default function ContactPage() {
         message: "",
       })
     } catch (error: any) {
+      console.error('Contact form error:', error)
       toast({
-        title: "Error",
+        title: "❌ Error Sending Message",
         description: error.message || "Failed to send message. Please try again or contact us directly at info@futurawatch.com",
         variant: "destructive",
       })
