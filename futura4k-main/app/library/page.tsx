@@ -493,7 +493,7 @@ export default function LibraryPage() {
                           onClick={() => handlePlay(show)}
                         >
                           <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                          Watch
+                          {t("library.buttons.watch")}
                         </Button>
                       </div>
                       <Badge

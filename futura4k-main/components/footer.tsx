@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Mail, MessageCircle } from "lucide-react"
+import { Mail } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
@@ -83,13 +83,6 @@ export function Footer() {
                   info@futurawatch.com
                 </button>
               </div>
-              <Button
-                onClick={() => window.open("https://signal.me/#eu/Td0r6W11XPRx9fPR-VNGX5HtY6UoUyvo779QXjGe85xm6M8wQ3dKa41lh2ep5HDQ", "_blank")}
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold mobile-button touch-element"
-              >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                Chat Now
-              </Button>
             </div>
           </div>
         </div>
