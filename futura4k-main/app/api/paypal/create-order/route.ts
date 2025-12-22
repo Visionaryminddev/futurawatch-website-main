@@ -123,6 +123,7 @@ export async function POST(req: Request) {
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.futurawatch.com'
     
+    // Use the simplest correct PayPal v2 Orders API structure
     const orderPayload = {
       intent: 'CAPTURE',
       purchase_units: [
@@ -136,15 +137,6 @@ export async function POST(req: Request) {
           },
         },
       ],
-      application_context: {
-        brand_name: 'FuturaWatch IPTV',
-        locale: 'en-US',
-        landing_page: 'LOGIN',
-        shipping_preference: 'NO_SHIPPING',
-        user_action: 'PAY_NOW',
-        return_url: `${appUrl}/purchase-success`,
-        cancel_url: `${appUrl}/subscriptions`,
-      },
     }
 
     console.log('PayPal order payload:', JSON.stringify(orderPayload, null, 2))
@@ -154,7 +146,7 @@ export async function POST(req: Request) {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
-        'PayPal-Request-Id': `futura-${Date.now()}`,
+        'Prefer': 'return=representation',
       },
       body: JSON.stringify(orderPayload),
     })
