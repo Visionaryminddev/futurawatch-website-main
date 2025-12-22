@@ -64,9 +64,19 @@ export async function POST(req: Request) {
     const SMTP_FROM = process.env.SMTP_FROM?.trim() || SMTP_USER || 'noreply@futurawatch.com'
     const CONTACT_EMAIL = process.env.CONTACT_EMAIL?.trim() || 'info@futurawatch.com'
 
+    // Log configuration (without password)
+    console.log('📧 SMTP Configuration:', {
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      user: SMTP_USER,
+      from: SMTP_FROM,
+      to: CONTACT_EMAIL,
+      hasPass: !!SMTP_PASS
+    })
+
     // Check if SMTP is configured
     if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-      console.error('SMTP configuration missing:', {
+      console.error('❌ SMTP configuration missing:', {
         hasHost: !!SMTP_HOST,
         hasUser: !!SMTP_USER,
         hasPass: !!SMTP_PASS,
@@ -74,6 +84,16 @@ export async function POST(req: Request) {
       })
       return NextResponse.json(
         { error: 'Email service is not configured. Please contact support directly at info@futurawatch.com' },
+        { status: 500 }
+      )
+    }
+
+    // Validate CONTACT_EMAIL format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(CONTACT_EMAIL)) {
+      console.error('❌ Invalid CONTACT_EMAIL format:', CONTACT_EMAIL)
+      return NextResponse.json(
+        { error: 'Email configuration error. Please contact support directly at info@futurawatch.com' },
         { status: 500 }
       )
     }
@@ -113,8 +133,10 @@ export async function POST(req: Request) {
     const safeMessage = escapeHtml(trimmedMessage).replace(/\n/g, '<br>')
 
     // Email content with better formatting
+    // IMPORTANT: Use SMTP_USER as FROM if SMTP_FROM is different, some providers require this
+    const fromEmail = SMTP_FROM || SMTP_USER
     const mailOptions = {
-      from: `"FuturaWatch Contact Form" <${SMTP_FROM}>`,
+      from: `"FuturaWatch Contact Form" <${fromEmail}>`,
       to: CONTACT_EMAIL,
       replyTo: trimmedEmail,
       subject: `[FuturaWatch Contact] ${safeSubject}`,
@@ -184,15 +206,47 @@ Reply directly to this email to respond to ${trimmedFullName}.
 
     console.log('✅ Contact form email sent successfully:', {
       messageId: info.messageId,
+      accepted: info.accepted, // Array of accepted email addresses
+      rejected: info.rejected, // Array of rejected email addresses
+      pending: info.pending, // Array of pending email addresses
+      response: info.response, // Response from SMTP server
       to: CONTACT_EMAIL,
-      from: trimmedEmail,
+      from: fromEmail,
+      replyTo: trimmedEmail,
       subject: trimmedSubject,
       timestamp: new Date().toISOString()
     })
 
+    // Check if email was actually accepted
+    if (info.rejected && info.rejected.length > 0) {
+      console.error('⚠️ Email was rejected by SMTP server:', {
+        rejected: info.rejected,
+        accepted: info.accepted
+      })
+      return NextResponse.json({
+        success: false,
+        error: 'Email was rejected by the server. Please check if info@futurawatch.com is a valid email address.',
+        message: 'Your message could not be delivered. Please try again or contact us directly at info@futurawatch.com',
+      }, { status: 500 })
+    }
+
+    if (!info.accepted || info.accepted.length === 0) {
+      console.error('⚠️ Email was not accepted by SMTP server')
+      return NextResponse.json({
+        success: false,
+        error: 'Email was not accepted by the server.',
+        message: 'Your message could not be delivered. Please try again or contact us directly at info@futurawatch.com',
+      }, { status: 500 })
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Your message has been sent successfully! We will get back to you soon.',
+      debug: process.env.NODE_ENV === 'development' ? {
+        messageId: info.messageId,
+        accepted: info.accepted,
+        to: CONTACT_EMAIL
+      } : undefined
     }, { status: 200 })
 
   } catch (error: any) {
