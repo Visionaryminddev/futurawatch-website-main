@@ -74,22 +74,32 @@ function PaymentRedirectContent() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to create PayPal order')
+        // Show detailed error message
+        const errorMsg = data.error || 'Failed to create PayPal order'
+        console.error('PayPal API error:', { status: response.status, data })
+        
+        // Check if it's a configuration error
+        if (errorMsg.includes('not configured') || errorMsg.includes('PAYPAL_CLIENT_ID')) {
+          throw new Error('PayPal is not properly configured. Please contact support.')
+        }
+        
+        throw new Error(errorMsg)
       }
 
       if (data.approvalUrl) {
         // Redirect to PayPal
         window.location.href = data.approvalUrl
       } else {
-        throw new Error('No PayPal approval URL received')
+        throw new Error('No PayPal approval URL received. Please try again or contact support.')
       }
 
     } catch (error: any) {
       console.error('PayPal error:', error)
       toast({
         title: "Payment Error",
-        description: error.message || "Failed to process payment. Please try again.",
-        variant: "destructive"
+        description: error.message || "Failed to process payment. Please check your PayPal configuration or try again later.",
+        variant: "destructive",
+        duration: 5000
       })
       setIsProcessing(false)
     }

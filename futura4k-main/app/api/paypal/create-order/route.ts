@@ -18,15 +18,28 @@ async function getPayPalAccessToken() {
     body: 'grant_type=client_credentials',
   })
 
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}))
+    throw new Error(`PayPal auth failed: ${errorData.error_description || errorData.error || response.statusText}`)
+  }
+
   const data = await response.json()
+  if (!data.access_token) {
+    throw new Error('No access token received from PayPal')
+  }
   return data.access_token
 }
 
 export async function POST(req: Request) {
   try {
     if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+      console.error('PayPal configuration missing:', {
+        hasClientId: !!PAYPAL_CLIENT_ID,
+        hasSecret: !!PAYPAL_CLIENT_SECRET,
+        mode: process.env.PAYPAL_MODE
+      })
       return NextResponse.json(
-        { error: 'PayPal is not configured' },
+        { error: 'PayPal is not configured. Please set PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in Vercel environment variables.' },
         { status: 500 }
       )
     }
@@ -85,15 +98,35 @@ export async function POST(req: Request) {
     const orderData = await response.json()
 
     if (!response.ok) {
-      console.error('PayPal error:', orderData)
+      console.error('PayPal API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        data: orderData
+      })
+      
+      // Provide more detailed error message
+      const errorMessage = orderData.message || 
+                          orderData.error_description || 
+                          orderData.details?.[0]?.description ||
+                          'Failed to create PayPal order'
+      
       return NextResponse.json(
-        { error: orderData.message || 'Failed to create PayPal order' },
-        { status: 500 }
+        { error: errorMessage, details: orderData },
+        { status: response.status || 500 }
       )
     }
 
     // Find the approval URL
-    const approvalUrl = orderData.links?.find((link: any) => link.rel === 'payer-action')?.href
+    const approvalUrl = orderData.links?.find((link: any) => link.rel === 'payer-action')?.href || 
+                       orderData.links?.find((link: any) => link.rel === 'approve')?.href
+
+    if (!approvalUrl) {
+      console.error('No approval URL in PayPal response:', orderData)
+      return NextResponse.json(
+        { error: 'PayPal did not return an approval URL. Please check your PayPal configuration.' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       orderId: orderData.id,
