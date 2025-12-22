@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Check, Star, Clock, Bitcoin } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
+import { TrustpilotWidget } from "@/components/trustpilot-widget"
 
 interface Plan {
   id: string
@@ -223,19 +224,16 @@ export default function SubscriptionsPage() {
               See what our satisfied customers say about FuturaWatch
             </p>
           </div>
-          <div
-            className="trustpilot-widget"
-            data-locale="nl-NL"
-            data-template-id="5419b6a8b0d04a076b216ad6"
-            data-businessunit-id="694992481d2da56aaca4b6df"
-            data-style-height="140px"
-            data-style-width="100%"
-            data-theme="dark"
-            data-stars="4,5"
-            data-font-family="Inter"
-          >
-            <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
-          </div>
+          <TrustpilotWidget
+            templateId="5419b6a8b0d04a076b216ad6"
+            businessunitId="694992481d2da56aaca4b6df"
+            locale="nl-NL"
+            styleHeight="140px"
+            styleWidth="100%"
+            theme="dark"
+            stars="4,5"
+            fontFamily="Inter"
+          />
         </div>
 
         {/* FAQ Section */}

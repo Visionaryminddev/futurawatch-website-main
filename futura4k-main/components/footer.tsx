@@ -5,6 +5,7 @@ import { Mail } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
+import { TrustpilotWidget } from "@/components/trustpilot-widget"
 
 export function Footer() {
   const t = useTranslate()
@@ -92,18 +93,15 @@ export function Footer() {
           <div className="text-center mb-4">
             <h3 className="text-sm font-semibold text-yellow-500 mb-2">Trusted by Thousands</h3>
           </div>
-          <div
-            className="trustpilot-widget"
-            data-locale="nl-NL"
-            data-template-id="54d39695764ea9070450d9dc"
-            data-businessunit-id="694992481d2da56aaca4b6df"
-            data-style-height="24px"
-            data-style-width="100%"
-            data-theme="dark"
-            data-stars="4,5"
-          >
-            <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
-          </div>
+          <TrustpilotWidget
+            templateId="54d39695764ea9070450d9dc"
+            businessunitId="694992481d2da56aaca4b6df"
+            locale="nl-NL"
+            styleHeight="24px"
+            styleWidth="100%"
+            theme="dark"
+            stars="4,5"
+          />
         </div>
 
         <div className="border-t border-gray-800 pt-6 text-center text-gray-400">

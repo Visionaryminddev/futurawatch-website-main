@@ -9,6 +9,7 @@ import { useTranslate } from "@/hooks/use-translate"
 import { useRouter } from "next/navigation"
 import SportsSlider from "@/components/sports-slider"
 import SlidingText from "@/components/sliding-text"
+import { TrustpilotWidget } from "@/components/trustpilot-widget"
 
 export default function HomePage() {
   const translate = useTranslate()
@@ -215,19 +216,15 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex justify-center">
-            {/* TrustBox widget - Review Collector */}
-            <div
-              className="trustpilot-widget"
-              data-locale="nl-NL"
-              data-template-id="56278e9abfbbba0bdcd568bc"
-              data-businessunit-id="694992481d2da56aaca4b6df"
-              data-style-height="52px"
-              data-style-width="100%"
-              data-token="bd63ea16-50e7-490e-8b53-4d764e4db7b7"
-            >
-              <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
-            </div>
-            {/* End TrustBox widget */}
+            <TrustpilotWidget
+              templateId="56278e9abfbbba0bdcd568bc"
+              businessunitId="694992481d2da56aaca4b6df"
+              locale="nl-NL"
+              styleHeight="500px"
+              styleWidth="100%"
+              theme="dark"
+              token="bd63ea16-50e7-490e-8b53-4d764e4db7b7"
+            />
           </div>
         </div>
       </section>

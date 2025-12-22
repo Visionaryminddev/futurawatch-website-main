@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Bitcoin, ExternalLink, Clock, Star, Check, Zap, ArrowLeft } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
+import { TrustpilotWidget } from "@/components/trustpilot-widget"
 
 interface Plan {
   id: string
@@ -206,18 +207,15 @@ function PurchasePageContent() {
                   {/* Trustpilot Mini Widget */}
                   <div className="mt-4 pt-4 border-t border-gray-700">
                     <p className="text-xs text-gray-400 mb-2 text-center">Trusted by thousands</p>
-                    <div
-                      className="trustpilot-widget"
-                      data-locale="nl-NL"
-                      data-template-id="54d39695764ea9070450d9dc"
-                      data-businessunit-id="694992481d2da56aaca4b6df"
-                      data-style-height="24px"
-                      data-style-width="100%"
-                      data-theme="dark"
-                      data-stars="4,5"
-                    >
-                      <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
-                    </div>
+                    <TrustpilotWidget
+                      templateId="54d39695764ea9070450d9dc"
+                      businessunitId="694992481d2da56aaca4b6df"
+                      locale="nl-NL"
+                      styleHeight="24px"
+                      styleWidth="100%"
+                      theme="dark"
+                      stars="4,5"
+                    />
                   </div>
                 </div>
               </CardContent>

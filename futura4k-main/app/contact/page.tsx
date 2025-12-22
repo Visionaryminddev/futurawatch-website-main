@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Mail, Clock } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 import { useToast } from "@/hooks/use-toast"
+import { TrustpilotWidget } from "@/components/trustpilot-widget"
 
 export default function ContactPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -203,19 +204,16 @@ export default function ContactPage() {
                 <p className="text-gray-400 text-sm mb-4">
                   See what our satisfied customers say about FuturaWatch
                 </p>
-                <div
-                  className="trustpilot-widget"
-                  data-locale="nl-NL"
-                  data-template-id="5419b6a8b0d04a076b216ad6"
-                  data-businessunit-id="694992481d2da56aaca4b6df"
-                  data-style-height="140px"
-                  data-style-width="100%"
-                  data-theme="dark"
-                  data-stars="4,5"
-                  data-font-family="Inter"
-                >
-                  <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
-                </div>
+                <TrustpilotWidget
+                  templateId="5419b6a8b0d04a076b216ad6"
+                  businessunitId="694992481d2da56aaca4b6df"
+                  locale="nl-NL"
+                  styleHeight="140px"
+                  styleWidth="100%"
+                  theme="dark"
+                  stars="4,5"
+                  fontFamily="Inter"
+                />
               </CardContent>
             </Card>
           </div>
