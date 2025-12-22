@@ -22,14 +22,6 @@ export const buttonActions = {
     console.log(`Downloading ${type} brochure...`)
   },
 
-  openLiveChat: () => {
-    toast({
-      title: "Live Chat",
-      description: "Connecting you to our support team...",
-    })
-    // In a real app, this would open a chat widget
-    console.log("Opening live chat...")
-  },
 
   contactTeam: () => "/contact",
 

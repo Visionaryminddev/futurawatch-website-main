@@ -380,17 +380,272 @@ export default function BlogPage() {
     },
     {
       id: 5,
-      slug: "is-iptv-legal-country-guide-2025",
-      title: "Is IPTV Legal in My Country? Complete Legal Guide 2025",
-      excerpt: "Understand IPTV legality worldwide. Get clear answers about legal IPTV services, licensing, and compliance in your region.",
-      metaDescription: "Learn about IPTV legality in different countries. Understand the difference between legal and illegal IPTV services in 2025.",
-      author: "Legal Technology Expert",
-      date: "2025-01-06",
-      category: "Legal & Compliance",
-      image: "/placeholder.svg?height=300&width=600&text=IPTV+Legal+Guide+2025",
-      imageAlt: "Gavel and scales of justice with IPTV streaming icons representing legal compliance",
-      readTime: "9 min read",
-      keyword: "IPTV legal 2025",
+      slug: "iptv-sports-channels-complete-guide-2025",
+      title: "Best IPTV Sports Channels: Complete Guide for Sports Fans 2025",
+      excerpt: "Discover the best IPTV services for sports streaming. Get access to live sports, PPV events, and premium sports channels worldwide.",
+      metaDescription: "Find the best IPTV sports channels in 2025. Complete guide to streaming live sports, PPV events, and premium sports content via IPTV.",
+      author: "Sports Streaming Expert",
+      date: "2025-01-04",
+      category: "Sports & Entertainment",
+      image: "/placeholder.svg?height=300&width=600&text=IPTV+Sports+Channels+2025",
+      imageAlt: "Sports stadium with IPTV streaming icons showing live sports coverage",
+      readTime: "8 min read",
+      keyword: "IPTV sports channels 2025",
+      content: `
+        <article class="max-w-4xl mx-auto">
+          <h1 class="text-4xl font-bold mb-6 text-yellow-500">Best IPTV Sports Channels: Complete Guide for Sports Fans 2025</h1>
+          
+          <div class="mb-8">
+            <img src="/placeholder.svg?height=300&width=600&text=IPTV+Sports+Channels+2025" alt="Sports stadium with IPTV streaming icons showing live sports coverage" class="w-full rounded-lg mb-4"/>
+            <p class="text-sm text-gray-400">Recommended image: Dynamic sports action with streaming overlay showing live IPTV coverage</p>
+          </div>
+
+          <p class="mb-6 text-gray-300 text-lg">Sports fans demand reliable, high-quality streaming for live games, PPV events, and premium sports content. IPTV services offer comprehensive sports coverage that traditional cable can't match.</p>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Premium Sports Channels Available on IPTV</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">International Sports Networks</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li><strong>ESPN Networks:</strong> ESPN, ESPN2, ESPN Deportes, ESPN U</li>
+            <li><strong>Fox Sports:</strong> Fox Sports 1, Fox Sports 2, regional networks</li>
+            <li><strong>Sky Sports:</strong> All 11 Sky Sports channels (UK)</li>
+            <li><strong>BT Sport:</strong> Complete BT Sport package</li>
+            <li><strong>beIN Sports:</strong> beIN Sports 1-12 (multiple regions)</li>
+            <li><strong>DAZN:</strong> Global sports streaming service</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Specialized Sports Content</h3>
+          <ul class="list-disc list-inside mb-6 text-gray-300 space-y-1">
+            <li>NFL Network, NBA TV, MLB Network, NHL Network</li>
+            <li>Premier League, La Liga, Serie A, Bundesliga coverage</li>
+            <li>UFC, WWE, Boxing PPV events</li>
+            <li>Formula 1, MotoGP, NASCAR coverage</li>
+            <li>Olympic Games and international tournaments</li>
+          </ul>
+
+          <div class="bg-gray-800 p-6 rounded-lg mb-6">
+            <img src="/placeholder.svg?height=250&width=500&text=Sports+Channel+Coverage+Map" alt="World map showing sports channel coverage by region" class="w-full rounded mb-4"/>
+            <p class="text-sm text-gray-400">Recommended image: Interactive map showing global sports channel availability</p>
+          </div>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Why IPTV is Perfect for Sports Fans</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">1. Comprehensive Coverage</h3>
+          <p class="mb-4 text-gray-300">Access sports from around the world in one subscription. No need for multiple cable packages or streaming services to watch different leagues and tournaments.</p>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">2. Live PPV Events Included</h3>
+          <p class="mb-4 text-gray-300">Premium IPTV services include major PPV events like boxing matches, UFC fights, and wrestling events without additional pay-per-view fees.</p>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">3. Multi-Device Streaming</h3>
+          <p class="mb-4 text-gray-300">Watch games on your TV, phone, or tablet simultaneously. Never miss important moments even when away from home.</p>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">4. Catch-Up and Replay</h3>
+          <p class="mb-6 text-gray-300">Missed a game? IPTV catch-up features let you watch full replays and highlights on-demand.</p>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Best Sports to Watch on IPTV</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Football (Soccer)</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li>Premier League, La Liga, Serie A, Bundesliga</li>
+            <li>Champions League and Europa League</li>
+            <li>World Cup, Euros, Copa America</li>
+            <li>International friendlies and qualifiers</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">American Sports</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li>NFL regular season and playoffs</li>
+            <li>NBA regular season and finals</li>
+            <li>MLB regular season and World Series</li>
+            <li>NHL regular season and Stanley Cup</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Combat Sports</h3>
+          <ul class="list-disc list-inside mb-6 text-gray-300 space-y-1">
+            <li>UFC events and Fight Nights</li>
+            <li>Boxing matches and title fights</li>
+            <li>WWE Raw, SmackDown, and PPV events</li>
+            <li>Bellator and other MMA promotions</li>
+          </ul>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">IPTV Sports Streaming Tips</h2>
+          <ol class="list-decimal list-inside mb-6 text-gray-300 space-y-2">
+            <li>Ensure stable internet connection (minimum 15 Mbps for HD sports)</li>
+            <li>Use wired connection for critical games to avoid buffering</li>
+            <li>Test stream quality before major events</li>
+            <li>Have backup server information ready</li>
+            <li>Enable hardware acceleration in IPTV app settings</li>
+            <li>Close unnecessary apps to maximize bandwidth</li>
+          </ol>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Cost Comparison: Sports Packages</h2>
+          <p class="mb-4 text-gray-300">Traditional cable sports packages can cost $50-100+ monthly for limited channels. Premium IPTV services offer comprehensive sports coverage starting at $19.99/month with access to thousands of sports channels worldwide.</p>
+
+          <p class="mb-6 text-gray-300">Ready to never miss a game? <a href="/subscriptions" class="text-yellow-400 hover:text-yellow-300 underline">Our premium IPTV service</a> includes all major sports channels, PPV events, and international sports coverage in one affordable package.</p>
+
+          <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 text-center">
+            <h3 class="text-xl font-bold text-yellow-400 mb-2">Get All Sports Channels</h3>
+            <p class="text-gray-300 mb-4">Premium sports coverage from around the world</p>
+            <a href="/subscriptions" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold inline-block transition-colors">Start Sports Streaming</a>
+          </div>
+        </article>
+      `
+    },
+    {
+      id: 6,
+      slug: "iptv-security-privacy-protection-guide-2025",
+      title: "IPTV Security and Privacy: Complete Protection Guide 2025",
+      excerpt: "Learn how to protect your privacy and secure your IPTV streaming. Essential security tips for safe IPTV usage.",
+      metaDescription: "Complete guide to IPTV security and privacy in 2025. Learn how to protect your data and stream safely with IPTV services.",
+      author: "Cybersecurity Expert",
+      date: "2025-01-02",
+      category: "Security & Privacy",
+      image: "/placeholder.svg?height=300&width=600&text=IPTV+Security+Guide+2025",
+      imageAlt: "Digital security shield protecting IPTV streaming with encryption symbols",
+      readTime: "10 min read",
+      keyword: "IPTV security privacy 2025",
+      content: `
+        <article class="max-w-4xl mx-auto">
+          <h1 class="text-4xl font-bold mb-6 text-yellow-500">IPTV Security and Privacy: Complete Protection Guide 2025</h1>
+          
+          <div class="mb-8">
+            <img src="/placeholder.svg?height=300&width=600&text=IPTV+Security+Guide+2025" alt="Digital security shield protecting IPTV streaming with encryption symbols" class="w-full rounded-lg mb-4"/>
+            <p class="text-sm text-gray-400">Recommended image: Professional security visualization with shield, lock icons, and encrypted connection</p>
+          </div>
+
+          <p class="mb-6 text-gray-300 text-lg">Protecting your privacy and securing your IPTV streaming is essential in today's digital landscape. This comprehensive guide covers all aspects of IPTV security and privacy protection.</p>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Understanding IPTV Security Risks</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Common Security Threats</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li>Data interception and monitoring</li>
+            <li>Malware and phishing attacks</li>
+            <li>Identity theft and credential theft</li>
+            <li>ISP tracking and throttling</li>
+            <li>Unauthorized access to accounts</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Privacy Concerns</h3>
+          <ul class="list-disc list-inside mb-6 text-gray-300 space-y-1">
+            <li>Viewing history tracking</li>
+            <li>Location data collection</li>
+            <li>Personal information exposure</li>
+            <li>Third-party data sharing</li>
+          </ul>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Essential Security Measures</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">1. Use VPN for Encryption</h3>
+          <p class="mb-4 text-gray-300">A Virtual Private Network (VPN) encrypts your internet traffic, preventing ISPs and third parties from monitoring your IPTV streaming activities. Choose reputable VPN providers with no-logs policies.</p>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">2. Strong Password Practices</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li>Use unique, complex passwords for IPTV accounts</li>
+            <li>Enable two-factor authentication when available</li>
+            <li>Never share credentials with others</li>
+            <li>Change passwords regularly</li>
+            <li>Use password manager for secure storage</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">3. Secure Payment Methods</h3>
+          <p class="mb-4 text-gray-300">Use secure payment processors like PayPal or credit cards with fraud protection. Avoid sharing banking details directly with unknown providers.</p>
+
+          <div class="bg-gray-800 p-6 rounded-lg mb-6">
+            <img src="/placeholder.svg?height=250&width=500&text=Security+Best+Practices+Checklist" alt="Security checklist showing best practices for IPTV protection" class="w-full rounded mb-4"/>
+            <p class="text-sm text-gray-400">Recommended image: Security checklist infographic with key protection measures</p>
+          </div>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Device Security</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Smart TV Security</h3>
+          <ol class="list-decimal list-inside mb-4 text-gray-300 space-y-2">
+            <li>Keep TV firmware updated to latest version</li>
+            <li>Disable unnecessary smart TV features</li>
+            <li>Use router-level VPN for comprehensive protection</li>
+            <li>Review and limit app permissions</li>
+            <li>Disconnect from internet when not in use</li>
+          </ol>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Mobile Device Protection</h3>
+          <ul class="list-disc list-inside mb-6 text-gray-300 space-y-1">
+            <li>Install apps only from official app stores</li>
+            <li>Keep operating system updated</li>
+            <li>Use mobile VPN apps for streaming</li>
+            <li>Enable device encryption</li>
+            <li>Review app permissions before installation</li>
+          </ul>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Network Security</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Router Configuration</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li>Change default router admin password</li>
+            <li>Enable WPA3 encryption for Wi-Fi</li>
+            <li>Disable remote management features</li>
+            <li>Set up guest network for streaming devices</li>
+            <li>Enable firewall protection</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">DNS Security</h3>
+          <p class="mb-6 text-gray-300">Use secure DNS servers like Cloudflare (1.1.1.1) or Google DNS (8.8.8.8) to prevent DNS hijacking and improve privacy.</p>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Choosing Secure IPTV Providers</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Security Indicators</h3>
+          <ul class="list-disc list-inside mb-4 text-gray-300 space-y-1">
+            <li>HTTPS encrypted website</li>
+            <li>Clear privacy policy and terms of service</li>
+            <li>Secure payment processing</li>
+            <li>Professional customer support</li>
+            <li>Regular service updates and maintenance</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Red Flags to Avoid</h3>
+          <ul class="list-disc list-inside mb-6 text-gray-300 space-y-1">
+            <li>Unencrypted connections</li>
+            <li>Requests for excessive personal information</li>
+            <li>Unusual payment methods only</li>
+            <li>No privacy policy or terms</li>
+            <li>Poor security practices</li>
+          </ul>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Privacy Protection Strategies</h2>
+          
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Data Minimization</h3>
+          <p class="mb-4 text-gray-300">Only provide necessary information during registration. Use separate email addresses for IPTV accounts if possible.</p>
+
+          <h3 class="text-xl font-semibold mb-3 text-yellow-400">Browsing Privacy</h3>
+          <ul class="list-disc list-inside mb-6 text-gray-300 space-y-1">
+            <li>Use private/incognito browsing when researching providers</li>
+            <li>Clear browser cookies regularly</li>
+            <li>Disable location tracking in browser settings</li>
+            <li>Use privacy-focused browsers like Brave or Firefox</li>
+          </ul>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Legal IPTV Services and Security</h2>
+          <p class="mb-6 text-gray-300">Legal IPTV providers invest in proper security infrastructure, data encryption, and compliance with privacy regulations. Choosing licensed services significantly reduces security risks compared to unlicensed alternatives.</p>
+
+          <h2 class="text-2xl font-semibold mb-4 text-white">Regular Security Maintenance</h2>
+          <ol class="list-decimal list-inside mb-6 text-gray-300 space-y-2">
+            <li>Update all devices and apps regularly</li>
+            <li>Review account activity for unauthorized access</li>
+            <li>Change passwords every 3-6 months</li>
+            <li>Monitor billing statements for suspicious charges</li>
+            <li>Keep security software updated</li>
+            <li>Backup important data regularly</li>
+          </ol>
+
+          <p class="mb-6 text-gray-300">Stay secure while streaming with confidence. <a href="/subscriptions" class="text-yellow-400 hover:text-yellow-300 underline">Our premium IPTV service</a> prioritizes security with encrypted connections, secure payment processing, and comprehensive privacy protection.</p>
+
+          <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 text-center">
+            <h3 class="text-xl font-bold text-yellow-400 mb-2">Secure IPTV Streaming</h3>
+            <p class="text-gray-300 mb-4">Privacy-focused service with enterprise-grade security</p>
+            <a href="/subscriptions" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold inline-block transition-colors">Get Secure IPTV</a>
+          </div>
+        </article>
+      `
+    },
       content: `
         <article class="max-w-4xl mx-auto">
           <h1 class="text-4xl font-bold mb-6 text-yellow-500">Is IPTV Legal in My Country? Complete Legal Guide 2025</h1>
@@ -495,7 +750,7 @@ export default function BlogPage() {
       `
     },
     {
-      id: 6,
+      id: 7,
       slug: "best-iptv-boxes-android-tv-devices-2025",
       title: "Best IPTV Boxes and Android TV Devices for Streaming in 2025",
       excerpt: "Compare top IPTV boxes and Android TV devices. Find the perfect streaming hardware for your home entertainment setup.",
@@ -628,7 +883,7 @@ export default function BlogPage() {
       `
     },
     {
-      id: 7,
+      id: 8,
       slug: "iptv-vpn-complete-setup-guide-2025",
       title: "IPTV with VPN: Complete Setup Guide for Secure Streaming 2025",
       excerpt: "Learn how to use VPN with IPTV for enhanced privacy and access. Step-by-step guide for secure streaming setup.",
@@ -781,7 +1036,7 @@ export default function BlogPage() {
       `
     },
     {
-      id: 8,
+      id: 9,
       slug: "iptv-troubleshooting-common-problems-solutions",
       title: "IPTV Troubleshooting: Fix Common Streaming Problems in 2025",
       excerpt: "Solve IPTV buffering, connection issues, and streaming problems with our comprehensive troubleshooting guide.",
@@ -950,7 +1205,7 @@ export default function BlogPage() {
       `
     },
     {
-      id: 9,
+      id: 10,
       slug: "iptv-vs-netflix-hulu-streaming-comparison-2025",
       title: "IPTV vs Netflix, Hulu & Other Streaming Services: 2025 Comparison",
       excerpt: "Compare IPTV with popular streaming platforms. Discover which option offers better value, content, and features for your needs.",
@@ -1141,26 +1396,6 @@ export default function BlogPage() {
           </div>
         </article>
       `
-    },
-    {
-      id: 5,
-      title: t("blog.posts.sports.title"),
-      excerpt: t("blog.posts.sports.excerpt"),
-      author: t("blog.posts.sports.author"),
-      date: "2023-12-28",
-      category: t("blog.categories.sports"),
-      image: "/placeholder.svg?height=200&width=400&text=Sports+HD",
-      readTime: t("blog.readTime", { minutes: "4" }),
-    },
-    {
-      id: 6,
-      title: t("blog.posts.security.title"),
-      excerpt: t("blog.posts.security.excerpt"),
-      author: t("blog.posts.security.author"),
-      date: "2023-12-25",
-      category: t("blog.categories.security"),
-      image: "/placeholder.svg?height=200&width=400&text=Security",
-      readTime: t("blog.readTime", { minutes: "7" }),
     },
   ]
 

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Check, Star, Clock, CreditCard, Bitcoin } from "lucide-react"
+import { Check, Star, Clock, Bitcoin } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
 
 interface Plan {
@@ -194,7 +194,7 @@ export default function SubscriptionsPage() {
           ))}
         </div>
 
-        {/* Payment Methods Info (gift cards removed; Stripe primary) */}
+        {/* Payment Methods Info */}
         <div className="mobile-card bg-gray-900 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-2xl font-bold text-yellow-500 mb-4 sm:mb-6 text-center">{t("subscriptions.paymentMethods")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -204,9 +204,11 @@ export default function SubscriptionsPage() {
               <p className="text-gray-400 text-xs sm:text-sm">{t("subscriptions.payment.cryptoOptions")}</p>
             </div>
             <div className="text-center">
-              <CreditCard className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-yellow-500 mx-auto mb-2 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Stripe</h3>
-              <p className="text-gray-400 text-xs sm:text-sm">Visa, Mastercard, Apple Pay via secure Stripe checkout.</p>
+              <svg className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-500 mx-auto mb-2 sm:mb-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .757-.646h6.87c2.278 0 3.932.666 4.912 1.98.465.624.765 1.32.893 2.067.138.803.074 1.736-.191 2.77-.994 3.866-3.39 5.106-6.696 5.106h-.958a.77.77 0 0 0-.757.646l-.734 4.664a.641.641 0 0 1-.633.54H7.076v-.51zm6.24-16.263h-6.87a.231.231 0 0 0-.227.194L3.11 22.145a.192.192 0 0 0 .19.222h4.606a.231.231 0 0 0 .227-.193l.733-4.665a.231.231 0 0 1 .227-.193h.958c2.99 0 5.144-1.114 6.045-4.638.233-.914.321-1.7.217-2.352-.097-.606-.327-1.15-.668-1.621-.792-1.094-2.249-1.626-4.33-1.626z"/>
+              </svg>
+              <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">PayPal</h3>
+              <p className="text-gray-400 text-xs sm:text-sm">Secure payments via PayPal. Pay with your PayPal balance, bank account, or credit/debit card.</p>
             </div>
           </div>
         </div>

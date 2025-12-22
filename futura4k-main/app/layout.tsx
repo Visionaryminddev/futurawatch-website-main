@@ -44,9 +44,28 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google tag (gtag.js) - Must be immediately after <head> */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEYC1RPJ6"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-KZEYC1RPJ6');
+            `,
+          }}
+        />
         <link rel="icon" href="/favicon.ico" />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <meta httpEquiv="x-ua-compatible" content="IE=edge" />
+        {/* Trustpilot Widget Script */}
+        <script
+          type="text/javascript"
+          src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          async
+        />
       </head>
       <body className={`${inter.className} bg-black text-white antialiased`} suppressHydrationWarning>
         <ErrorBoundary>

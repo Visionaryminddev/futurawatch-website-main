@@ -202,6 +202,40 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Trustpilot Widget */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-900">
+        <div className="mobile-container">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6">
+              Trusted by <span className="text-yellow-500">Thousands</span>
+            </h2>
+            <p className="responsive-subtitle text-gray-400 max-w-3xl mx-auto">
+              See what our customers are saying about FuturaWatch
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <div
+              className="trustpilot-widget"
+              data-locale="en-US"
+              data-template-id="56278e9abfbbba0bdcd568bc"
+              data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || ""}
+              data-style-height="500px"
+              data-style-width="100%"
+              data-theme="dark"
+            >
+              <a
+                href="https://www.trustpilot.com/review/www.futurawatch.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="trustpilot-link"
+              >
+                Trustpilot
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

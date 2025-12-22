@@ -7,12 +7,18 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Mail, MessageCircle, Clock, CheckCircle } from "lucide-react"
+import { Mail, Clock } from "lucide-react"
 import { useTranslate } from "@/hooks/use-translate"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ContactPage() {
   const [isLoading, setIsLoading] = useState(false)
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
   const t = useTranslate()
   const { toast } = useToast()
 
@@ -20,23 +26,42 @@ export default function ContactPage() {
     e.preventDefault()
     setIsLoading(true)
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsLoading(false)
-      toast({
-        title: t("contact.toast.title"),
-        description: t("contact.toast.description"),
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-    }, 1000)
-  }
 
-  const handleLiveChat = () => {
-    // Redirect to Signal link
-    window.open("https://signal.me/#eu/Td0r6W11XPRx9fPR-VNGX5HtY6UoUyvo779QXjGe85xm6M8wQ3dKa41lh2ep5HDQ", "_blank")
-    toast({
-      title: "Redirecting to Live Chat",
-      description: "Opening secure chat platform...",
-    })
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      toast({
+        title: "Message Sent Successfully!",
+        description: "We've received your message and will get back to you soon.",
+      })
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again or contact us directly at info@futurawatch.com",
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -64,6 +89,8 @@ export default function ContactPage() {
                     id="fullName"
                     type="text"
                     required
+                    value={formData.fullName}
+                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                     className="mt-2 bg-gray-800 border-gray-700 text-white mobile-focus h-12 sm:h-auto"
                   />
                 </div>
@@ -73,6 +100,8 @@ export default function ContactPage() {
                     id="email"
                     type="email"
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="mt-2 bg-gray-800 border-gray-700 text-white mobile-focus h-12 sm:h-auto"
                   />
                 </div>
@@ -82,6 +111,8 @@ export default function ContactPage() {
                     id="subject"
                     type="text"
                     required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="mt-2 bg-gray-800 border-gray-700 text-white"
                   />
                 </div>
@@ -91,6 +122,8 @@ export default function ContactPage() {
                     id="message"
                     rows={4}
                     required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="mt-2 bg-gray-800 border-gray-700 text-white"
                   />
                 </div>
@@ -137,22 +170,6 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            {/* Live Chat */}
-            <Card className="bg-gray-900 border-gray-800">
-              <CardHeader>
-                <CardTitle className="text-xl font-bold text-yellow-500">{t("contact.liveChat.title")}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-400 mb-4">{t("contact.liveChat.description")}</p>
-                <Button
-                  onClick={handleLiveChat}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white"
-                >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  {t("contact.liveChat.start")}
-                </Button>
-              </CardContent>
-            </Card>
 
             {/* Support Types */}
             <Card className="bg-gray-900 border-gray-800">
