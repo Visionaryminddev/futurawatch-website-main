@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Mail, CheckCircle, Star } from "lucide-react"
+import { ArrowLeft, Mail, CheckCircle, Star, CreditCard, Bitcoin } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { useTranslate } from "@/hooks/use-translate"
 import { useRouter } from "next/navigation"
@@ -16,15 +16,31 @@ export default function NewResellerPage() {
   const [formData, setFormData] = useState({
     email: "",
     package: "",
+    paymentMethod: "",
   })
 
   const { toast } = useToast()
   const t = useTranslate()
   const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const getPaymentUrl = (packagePoints: string, paymentMethod: string) => {
+    const packageLinks: Record<string, Record<string, string>> = {
+      "10-550": {
+        paypal: "", // Uses existing PayPal checkout flow
+        crypto: "https://nowpayments.io/embeds/payment-widget?iid=4569373688",
+      },
+      "15-750": {
+        paypal: "", // Uses existing PayPal checkout flow
+        crypto: "https://nowpayments.io/embeds/payment-widget?iid=5348681626",
+      },
+    }
+    
+    return packageLinks[packagePoints]?.[paymentMethod] || ""
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.email || !formData.package) {
+    if (!formData.email || !formData.package || !formData.paymentMethod) {
       toast({
         title: "Error",
         description: "Please fill in all required fields.",
@@ -33,14 +49,29 @@ export default function NewResellerPage() {
       return
     }
 
-    // Redirect to Signal link
-    window.open("https://signal.me/#eu/Td0r6W11XPRx9fPR-VNGX5HtY6UoUyvo779QXjGe85xm6M8wQ3dKa41lh2ep5HDQ", "_blank")
-    
-    toast({
-      title: "Redirecting to Secure Platform",
-      description: "You will be contacted within 24 hours with your reseller details.",
-    })
-    setFormData({ email: "", package: "" })
+    if (formData.paymentMethod === "paypal") {
+      // Redirect to PayPal payment page with package info
+      const params = new URLSearchParams({
+        name: `Reseller Package ${formData.package.split("-")[0]} Points`,
+        price: `€${formData.package.split("-")[1]}`,
+        duration: "One-time",
+        email: formData.email,
+        type: "reseller",
+      })
+      router.push(`/payment-redirect?${params.toString()}`)
+    } else if (formData.paymentMethod === "crypto") {
+      // Get crypto payment URL for the selected package
+      const cryptoUrl = getPaymentUrl(formData.package, "crypto")
+      if (cryptoUrl) {
+        window.open(cryptoUrl, "_blank", "noopener,noreferrer")
+      } else {
+        toast({
+          title: "Payment Link Not Available",
+          description: "Crypto payment link for this package is not configured yet.",
+          variant: "destructive",
+        })
+      }
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -141,12 +172,45 @@ export default function NewResellerPage() {
                     </select>
                   </div>
 
+                  <div>
+                    <label className="block responsive-text font-medium text-gray-300 mb-2">
+                      Payment Method *
+                    </label>
+                    <div className="grid grid-cols-2 gap-4">
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, paymentMethod: "paypal" })}
+                        className={`p-4 rounded-lg border-2 transition-all ${
+                          formData.paymentMethod === "paypal"
+                            ? "border-blue-500 bg-blue-500/20"
+                            : "border-gray-700 bg-gray-800 hover:border-gray-600"
+                        }`}
+                      >
+                        <CreditCard className="w-6 h-6 mx-auto mb-2 text-blue-500" />
+                        <span className="text-white font-medium">PayPal</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, paymentMethod: "crypto" })}
+                        className={`p-4 rounded-lg border-2 transition-all ${
+                          formData.paymentMethod === "crypto"
+                            ? "border-yellow-500 bg-yellow-500/20"
+                            : "border-gray-700 bg-gray-800 hover:border-gray-600"
+                        }`}
+                      >
+                        <Bitcoin className="w-6 h-6 mx-auto mb-2 text-yellow-500" />
+                        <span className="text-white font-medium">Crypto</span>
+                      </button>
+                    </div>
+                  </div>
+
                   <Button
                     type="submit"
-                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold mobile-button-lg"
+                    disabled={!formData.email || !formData.package || !formData.paymentMethod}
+                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold mobile-button-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Mail className="mr-2 h-5 w-5" />
-                    Register Now
+                    {formData.paymentMethod === "paypal" ? "Pay with PayPal" : formData.paymentMethod === "crypto" ? "Pay with Crypto" : "Register Now"}
                   </Button>
                 </form>
               </CardContent>
