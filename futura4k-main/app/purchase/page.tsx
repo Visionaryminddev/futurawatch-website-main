@@ -208,15 +208,15 @@ function PurchasePageContent() {
                     <p className="text-xs text-gray-400 mb-2 text-center">Trusted by thousands</p>
                     <div
                       className="trustpilot-widget"
-                      data-locale="en-US"
+                      data-locale="nl-NL"
                       data-template-id="54d39695764ea9070450d9dc"
-                      data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || "65b211111111111111111111"}
+                      data-businessunit-id="694992481d2da56aaca4b6df"
                       data-style-height="24px"
                       data-style-width="100%"
                       data-theme="dark"
                       data-stars="4,5"
                     >
-                      <a href="https://www.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
+                      <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
                     </div>
                   </div>
                 </div>

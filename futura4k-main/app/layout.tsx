@@ -60,12 +60,13 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <meta httpEquiv="x-ua-compatible" content="IE=edge" />
-        {/* Trustpilot Widget Script */}
+        {/* TrustBox script */}
         <script
           type="text/javascript"
-          src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
           async
         />
+        {/* End TrustBox script */}
       </head>
       <body className={`${inter.className} bg-black text-white antialiased`} suppressHydrationWarning>
         <ErrorBoundary>

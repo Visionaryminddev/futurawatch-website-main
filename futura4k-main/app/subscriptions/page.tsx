@@ -225,16 +225,16 @@ export default function SubscriptionsPage() {
           </div>
           <div
             className="trustpilot-widget"
-            data-locale="en-US"
+            data-locale="nl-NL"
             data-template-id="5419b6a8b0d04a076b216ad6"
-            data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || "65b211111111111111111111"}
+            data-businessunit-id="694992481d2da56aaca4b6df"
             data-style-height="140px"
             data-style-width="100%"
             data-theme="dark"
             data-stars="4,5"
             data-font-family="Inter"
           >
-            <a href="https://www.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
+            <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
           </div>
         </div>
 

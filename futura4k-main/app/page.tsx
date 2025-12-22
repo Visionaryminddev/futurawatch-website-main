@@ -215,24 +215,19 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex justify-center">
+            {/* TrustBox widget - Review Collector */}
             <div
               className="trustpilot-widget"
-              data-locale="en-US"
+              data-locale="nl-NL"
               data-template-id="56278e9abfbbba0bdcd568bc"
-              data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || ""}
-              data-style-height="500px"
+              data-businessunit-id="694992481d2da56aaca4b6df"
+              data-style-height="52px"
               data-style-width="100%"
-              data-theme="dark"
+              data-token="bd63ea16-50e7-490e-8b53-4d764e4db7b7"
             >
-              <a
-                href="https://www.trustpilot.com/review/www.futurawatch.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="trustpilot-link"
-              >
-                Trustpilot
-              </a>
+              <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
             </div>
+            {/* End TrustBox widget */}
           </div>
         </div>
       </section>
