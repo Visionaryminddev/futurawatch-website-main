@@ -1,13 +1,23 @@
 import { NextResponse } from 'next/server'
 
-const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID
-const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET
-const PAYPAL_API_URL = process.env.PAYPAL_MODE === 'live' 
+// Trim whitespace from credentials to avoid authentication issues
+const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID?.trim()
+const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET?.trim()
+const PAYPAL_MODE = process.env.PAYPAL_MODE?.trim() || 'sandbox'
+const PAYPAL_API_URL = PAYPAL_MODE === 'live' 
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com'
 
 async function getPayPalAccessToken() {
-  const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64')
+  if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+    throw new Error('PayPal credentials are missing')
+  }
+
+  // Remove any whitespace or newlines from credentials
+  const clientId = PAYPAL_CLIENT_ID.replace(/\s/g, '')
+  const clientSecret = PAYPAL_CLIENT_SECRET.replace(/\s/g, '')
+  
+  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
   
   const response = await fetch(`${PAYPAL_API_URL}/v1/oauth2/token`, {
     method: 'POST',
@@ -20,7 +30,18 @@ async function getPayPalAccessToken() {
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}))
-    throw new Error(`PayPal auth failed: ${errorData.error_description || errorData.error || response.statusText}`)
+    const errorMsg = errorData.error_description || errorData.error || response.statusText
+    
+    // Provide helpful error message
+    if (errorMsg.includes('invalid_client') || errorMsg.includes('authentication')) {
+      throw new Error(`PayPal authentication failed. Please check:
+1. Your Client ID and Secret are correct
+2. They match the mode (${PAYPAL_MODE}) - Live credentials for live mode, Sandbox for sandbox
+3. No extra spaces or characters in Vercel environment variables
+Error: ${errorMsg}`)
+    }
+    
+    throw new Error(`PayPal auth failed: ${errorMsg}`)
   }
 
   const data = await response.json()
@@ -32,14 +53,34 @@ async function getPayPalAccessToken() {
 
 export async function POST(req: Request) {
   try {
+    // Debug logging (remove sensitive data in production)
+    console.log('PayPal config check:', {
+      hasClientId: !!PAYPAL_CLIENT_ID,
+      hasSecret: !!PAYPAL_CLIENT_SECRET,
+      mode: PAYPAL_MODE,
+      apiUrl: PAYPAL_API_URL,
+      clientIdLength: PAYPAL_CLIENT_ID?.length || 0,
+      secretLength: PAYPAL_CLIENT_SECRET?.length || 0,
+      clientIdStart: PAYPAL_CLIENT_ID?.substring(0, 10) || 'none'
+    })
+
     if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
       console.error('PayPal configuration missing:', {
         hasClientId: !!PAYPAL_CLIENT_ID,
         hasSecret: !!PAYPAL_CLIENT_SECRET,
-        mode: process.env.PAYPAL_MODE
+        mode: PAYPAL_MODE,
+        clientIdLength: PAYPAL_CLIENT_ID?.length || 0,
+        secretLength: PAYPAL_CLIENT_SECRET?.length || 0
       })
       return NextResponse.json(
-        { error: 'PayPal is not configured. Please set PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET in Vercel environment variables.' },
+        { 
+          error: 'PayPal is not configured. Please set PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, and PAYPAL_MODE in Vercel environment variables.',
+          debug: {
+            hasClientId: !!PAYPAL_CLIENT_ID,
+            hasSecret: !!PAYPAL_CLIENT_SECRET,
+            mode: PAYPAL_MODE
+          }
+        },
         { status: 500 }
       )
     }
@@ -58,7 +99,27 @@ export async function POST(req: Request) {
     const priceString = planPrice.toString().replace('€', '').replace(',', '.').trim()
     const priceAmount = parseFloat(priceString).toFixed(2)
 
-    const accessToken = await getPayPalAccessToken()
+    console.log('Creating PayPal order:', {
+      planName,
+      planPrice: priceAmount,
+      mode: PAYPAL_MODE,
+      apiUrl: PAYPAL_API_URL
+    })
+
+    let accessToken
+    try {
+      accessToken = await getPayPalAccessToken()
+      console.log('PayPal access token obtained successfully')
+    } catch (authError: any) {
+      console.error('PayPal authentication error:', authError)
+      return NextResponse.json(
+        { 
+          error: authError.message || 'PayPal authentication failed. Please check your credentials in Vercel.',
+          type: 'authentication_error'
+        },
+        { status: 401 }
+      )
+    }
 
     const response = await fetch(`${PAYPAL_API_URL}/v2/checkout/orders`, {
       method: 'POST',

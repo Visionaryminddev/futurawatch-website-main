@@ -78,9 +78,13 @@ function PaymentRedirectContent() {
         const errorMsg = data.error || 'Failed to create PayPal order'
         console.error('PayPal API error:', { status: response.status, data })
         
-        // Check if it's a configuration error
+        // Show the actual error message from PayPal
+        if (data.type === 'authentication_error') {
+          throw new Error(`PayPal Authentication Error: ${errorMsg}. Please check your PayPal credentials in Vercel.`)
+        }
+        
         if (errorMsg.includes('not configured') || errorMsg.includes('PAYPAL_CLIENT_ID')) {
-          throw new Error('PayPal is not properly configured. Please contact support.')
+          throw new Error(`PayPal Configuration Error: ${errorMsg}. Please check Vercel environment variables.`)
         }
         
         throw new Error(errorMsg)
