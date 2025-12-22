@@ -121,39 +121,42 @@ export async function POST(req: Request) {
       )
     }
 
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.futurawatch.com'
+    
+    const orderPayload = {
+      intent: 'CAPTURE',
+      purchase_units: [
+        {
+          reference_id: `IPTV-${Date.now()}`,
+          description: `FuturaWatch IPTV - ${planName} (${planDuration})`,
+          custom_id: email,
+          amount: {
+            currency_code: 'EUR',
+            value: priceAmount,
+          },
+        },
+      ],
+      application_context: {
+        brand_name: 'FuturaWatch IPTV',
+        locale: 'en-US',
+        landing_page: 'LOGIN',
+        shipping_preference: 'NO_SHIPPING',
+        user_action: 'PAY_NOW',
+        return_url: `${appUrl}/purchase-success`,
+        cancel_url: `${appUrl}/subscriptions`,
+      },
+    }
+
+    console.log('PayPal order payload:', JSON.stringify(orderPayload, null, 2))
+
     const response = await fetch(`${PAYPAL_API_URL}/v2/checkout/orders`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
+        'PayPal-Request-Id': `futura-${Date.now()}`,
       },
-      body: JSON.stringify({
-        intent: 'CAPTURE',
-        purchase_units: [
-          {
-            reference_id: `IPTV-${Date.now()}`,
-            description: `FuturaWatch IPTV - ${planName} (${planDuration})`,
-            custom_id: email,
-            amount: {
-              currency_code: 'EUR',
-              value: priceAmount,
-            },
-          },
-        ],
-        payment_source: {
-          paypal: {
-            experience_context: {
-              brand_name: 'FuturaWatch IPTV',
-              locale: 'en-US',
-              landing_page: 'LOGIN',
-              shipping_preference: 'NO_SHIPPING',
-              user_action: 'PAY_NOW',
-              return_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.futurawatch.com'}/purchase-success`,
-              cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.futurawatch.com'}/subscriptions`,
-            },
-          },
-        },
-      }),
+      body: JSON.stringify(orderPayload),
     })
 
     const orderData = await response.json()
