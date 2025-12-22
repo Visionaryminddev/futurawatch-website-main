@@ -213,6 +213,31 @@ export default function SubscriptionsPage() {
           </div>
         </div>
 
+        {/* Trustpilot Widget Section */}
+        <div className="mobile-card bg-gray-900 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12">
+          <div className="text-center mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-yellow-500 mb-2">
+              Trusted by Thousands
+            </h2>
+            <p className="text-gray-400 text-sm sm:text-base">
+              See what our satisfied customers say about FuturaWatch
+            </p>
+          </div>
+          <div
+            className="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="5419b6a8b0d04a076b216ad6"
+            data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || "65b211111111111111111111"}
+            data-style-height="140px"
+            data-style-width="100%"
+            data-theme="dark"
+            data-stars="4,5"
+            data-font-family="Inter"
+          >
+            <a href="https://www.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
+        </div>
+
         {/* FAQ Section */}
         <div className="mobile-card bg-gray-900 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-2xl font-bold text-yellow-500 mb-4 sm:mb-6 text-center">{t("subscriptions.faq.title")}</h2>

@@ -87,7 +87,26 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+        {/* Trustpilot Widget in Footer */}
+        <div className="border-t border-gray-800 mt-8 pt-6 mb-6">
+          <div className="text-center mb-4">
+            <h3 className="text-sm font-semibold text-yellow-500 mb-2">Trusted by Thousands</h3>
+          </div>
+          <div
+            className="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="54d39695764ea9070450d9dc"
+            data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || "65b211111111111111111111"}
+            data-style-height="24px"
+            data-style-width="100%"
+            data-theme="dark"
+            data-stars="4,5"
+          >
+            <a href="https://www.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800 pt-6 text-center text-gray-400">
           <p className="responsive-text">{t("footer.copyright").replace("{{year}}", currentYear.toString()).replace("Futura4K", "FuturaWatch")}</p>
         </div>
       </div>

@@ -202,6 +202,23 @@ function PurchasePageContent() {
                       {t('purchase.guarantee.description')}
                     </p>
                   </div>
+
+                  {/* Trustpilot Mini Widget */}
+                  <div className="mt-4 pt-4 border-t border-gray-700">
+                    <p className="text-xs text-gray-400 mb-2 text-center">Trusted by thousands</p>
+                    <div
+                      className="trustpilot-widget"
+                      data-locale="en-US"
+                      data-template-id="54d39695764ea9070450d9dc"
+                      data-businessunit-id={process.env.NEXT_PUBLIC_TRUSTPILOT_BUSINESS_ID || "65b211111111111111111111"}
+                      data-style-height="24px"
+                      data-style-width="100%"
+                      data-theme="dark"
+                      data-stars="4,5"
+                    >
+                      <a href="https://www.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">Trustpilot</a>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
