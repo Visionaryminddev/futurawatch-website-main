@@ -647,13 +647,34 @@ input, textarea, select {
   min-height: 24px;
   width: 100%;
   display: block;
+  position: relative;
+  overflow: visible;
 }
 
 .trustpilot-widget iframe {
   border: none !important;
   width: 100% !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .trustpilot-widget a {
   display: none;
+}
+
+/* Trustpilot widget content */
+.trustpilot-widget > div {
+  width: 100% !important;
+  min-height: inherit !important;
+}
+
+/* Fallback styling */
+.trustpilot-widget-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(31, 41, 55, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

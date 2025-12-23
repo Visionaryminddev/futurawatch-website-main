@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface TrustpilotWidgetProps {
   templateId: string
@@ -24,38 +24,50 @@ declare global {
 }
 
 // Ensure script is loaded
-function ensureTrustpilotScript(): Promise<void> {
+function ensureTrustpilotScript(): Promise<boolean> {
   return new Promise((resolve) => {
     // Check if already loaded
     if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
-      resolve()
+      console.log('✅ Trustpilot script already loaded')
+      resolve(true)
       return
     }
 
     // Check if script tag already exists
     const existingScript = document.querySelector('script[src*="trustpilot.com/bootstrap"]')
     if (existingScript) {
+      console.log('⏳ Trustpilot script tag exists, waiting for load...')
       // Script tag exists, wait for it to load
+      let attempts = 0
+      const maxAttempts = 100 // 10 seconds max
       const checkInterval = setInterval(() => {
+        attempts++
         if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
+          console.log('✅ Trustpilot script loaded after', attempts * 100, 'ms')
           clearInterval(checkInterval)
-          resolve()
+          resolve(true)
+        } else if (attempts >= maxAttempts) {
+          console.warn('⚠️ Trustpilot script failed to load after timeout')
+          clearInterval(checkInterval)
+          resolve(false)
         }
       }, 100)
-
-      // Timeout after 10 seconds
-      setTimeout(() => {
-        clearInterval(checkInterval)
-        resolve() // Resolve anyway to not block
-      }, 10000)
     } else {
+      console.log('📥 Loading Trustpilot script...')
       // Script doesn't exist, load it
       const script = document.createElement('script')
       script.type = 'text/javascript'
       script.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js'
       script.async = true
-      script.onload = () => resolve()
-      script.onerror = () => resolve() // Resolve on error to not block
+      script.onload = () => {
+        console.log('✅ Trustpilot script loaded successfully')
+        // Wait a bit for Trustpilot to initialize
+        setTimeout(() => resolve(true), 500)
+      }
+      script.onerror = (error) => {
+        console.error('❌ Failed to load Trustpilot script:', error)
+        resolve(false)
+      }
       document.head.appendChild(script)
     }
   })
@@ -75,25 +87,62 @@ export function TrustpilotWidget({
 }: TrustpilotWidgetProps) {
   const widgetRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
+  const [loadError, setLoadError] = useState(false)
 
   useEffect(() => {
     if (!widgetRef.current || initializedRef.current) return
 
     const initializeWidget = async () => {
       try {
+        console.log('🔄 Initializing Trustpilot widget:', { templateId, businessunitId })
+        
         // Ensure script is loaded
-        await ensureTrustpilotScript()
+        const scriptLoaded = await ensureTrustpilotScript()
+        
+        if (!scriptLoaded) {
+          console.error('❌ Trustpilot script failed to load')
+          setLoadError(true)
+          return
+        }
 
         // Wait a bit for DOM to be ready
-        await new Promise(resolve => setTimeout(resolve, 300))
+        await new Promise(resolve => setTimeout(resolve, 500))
 
         // Initialize widget
         if (widgetRef.current && window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
-          window.Trustpilot.loadFromElement(widgetRef.current, true)
-          initializedRef.current = true
+          console.log('🚀 Loading widget from element...')
+          try {
+            window.Trustpilot.loadFromElement(widgetRef.current, true)
+            initializedRef.current = true
+            console.log('✅ Widget initialized successfully')
+            
+            // Check if widget actually rendered after a delay
+            setTimeout(() => {
+              if (widgetRef.current) {
+                const iframe = widgetRef.current.querySelector('iframe')
+                const hasContent = widgetRef.current.children.length > 1 || iframe
+                if (!hasContent) {
+                  console.warn('⚠️ Widget container appears empty after initialization')
+                } else {
+                  console.log('✅ Widget content detected')
+                }
+              }
+            }, 2000)
+          } catch (initError) {
+            console.error('❌ Error calling loadFromElement:', initError)
+            setLoadError(true)
+          }
+        } else {
+          console.error('❌ Trustpilot API not available:', {
+            hasTrustpilot: !!window.Trustpilot,
+            hasLoadFromElement: !!(window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function'),
+            hasElement: !!widgetRef.current
+          })
+          setLoadError(true)
         }
       } catch (error) {
-        console.error("Error initializing Trustpilot widget:", error)
+        console.error("❌ Error initializing Trustpilot widget:", error)
+        setLoadError(true)
       }
     }
 
@@ -105,10 +154,30 @@ export function TrustpilotWidget({
     }
   }, [templateId, businessunitId])
 
+  // Fallback if widget fails to load
+  if (loadError) {
+    return (
+      <div className={`trustpilot-widget-fallback ${className}`} style={{ minHeight: styleHeight, width: styleWidth }}>
+        <div className="flex flex-col items-center justify-center p-4 text-gray-400">
+          <p className="text-sm mb-2">Trustpilot reviews</p>
+          <a 
+            href="https://nl.trustpilot.com/review/futurawatch.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-yellow-500 hover:text-yellow-400 underline"
+          >
+            View reviews on Trustpilot
+          </a>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
       ref={widgetRef}
       className={`trustpilot-widget ${className}`}
+      style={{ minHeight: styleHeight, width: styleWidth }}
       data-locale={locale}
       data-template-id={templateId}
       data-businessunit-id={businessunitId}

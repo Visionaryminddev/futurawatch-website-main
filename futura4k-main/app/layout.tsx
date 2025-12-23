@@ -59,12 +59,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//widget.trustpilot.com" />
         <meta httpEquiv="x-ua-compatible" content="IE=edge" />
         {/* TrustBox script */}
         <script
           type="text/javascript"
           src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-          async
+          defer
         />
         {/* End TrustBox script */}
       </head>
