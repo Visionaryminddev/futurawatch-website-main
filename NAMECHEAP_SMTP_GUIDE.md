@@ -236,3 +236,4 @@ Als je problemen hebt:
 2. Test je email account met een email client (Outlook, Thunderbird)
 3. Neem contact op met Namecheap support als je email account niet werkt
 
+

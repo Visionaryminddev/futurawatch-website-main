@@ -127,3 +127,4 @@ De emails die worden verzonden bevatten:
 - ✅ SMTP connection verification
 - ✅ Error handling met gebruiksvriendelijke berichten
 
+

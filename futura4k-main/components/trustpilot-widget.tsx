@@ -23,6 +23,44 @@ declare global {
   }
 }
 
+// Ensure script is loaded
+function ensureTrustpilotScript(): Promise<void> {
+  return new Promise((resolve) => {
+    // Check if already loaded
+    if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
+      resolve()
+      return
+    }
+
+    // Check if script tag already exists
+    const existingScript = document.querySelector('script[src*="trustpilot.com/bootstrap"]')
+    if (existingScript) {
+      // Script tag exists, wait for it to load
+      const checkInterval = setInterval(() => {
+        if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
+          clearInterval(checkInterval)
+          resolve()
+        }
+      }, 100)
+
+      // Timeout after 10 seconds
+      setTimeout(() => {
+        clearInterval(checkInterval)
+        resolve() // Resolve anyway to not block
+      }, 10000)
+    } else {
+      // Script doesn't exist, load it
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js'
+      script.async = true
+      script.onload = () => resolve()
+      script.onerror = () => resolve() // Resolve on error to not block
+      document.head.appendChild(script)
+    }
+  })
+}
+
 export function TrustpilotWidget({
   templateId,
   businessunitId,
@@ -36,40 +74,34 @@ export function TrustpilotWidget({
   className = "",
 }: TrustpilotWidgetProps) {
   const widgetRef = useRef<HTMLDivElement>(null)
+  const initializedRef = useRef(false)
 
   useEffect(() => {
-    const loadWidget = () => {
-      if (widgetRef.current && window.Trustpilot) {
-        try {
+    if (!widgetRef.current || initializedRef.current) return
+
+    const initializeWidget = async () => {
+      try {
+        // Ensure script is loaded
+        await ensureTrustpilotScript()
+
+        // Wait a bit for DOM to be ready
+        await new Promise(resolve => setTimeout(resolve, 300))
+
+        // Initialize widget
+        if (widgetRef.current && window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
           window.Trustpilot.loadFromElement(widgetRef.current, true)
-        } catch (error) {
-          console.error("Error loading Trustpilot widget:", error)
+          initializedRef.current = true
         }
+      } catch (error) {
+        console.error("Error initializing Trustpilot widget:", error)
       }
     }
 
-    // Check if Trustpilot is already loaded
-    if (window.Trustpilot && window.Trustpilot.loadFromElement) {
-      // Small delay to ensure DOM is ready
-      setTimeout(loadWidget, 100)
-    } else {
-      // Wait for the script to load
-      const checkTrustpilot = setInterval(() => {
-        if (window.Trustpilot && window.Trustpilot.loadFromElement) {
-          clearInterval(checkTrustpilot)
-          loadWidget()
-        }
-      }, 100)
+    initializeWidget()
 
-      // Cleanup after 10 seconds
-      const timeout = setTimeout(() => {
-        clearInterval(checkTrustpilot)
-      }, 10000)
-
-      return () => {
-        clearInterval(checkTrustpilot)
-        clearTimeout(timeout)
-      }
+    // Cleanup
+    return () => {
+      initializedRef.current = false
     }
   }, [templateId, businessunitId])
 
@@ -87,7 +119,7 @@ export function TrustpilotWidget({
       data-font-family={fontFamily}
       data-token={token}
     >
-      <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener">
+      <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener noreferrer">
         Trustpilot
       </a>
     </div>
