@@ -89,7 +89,6 @@ export async function POST(req: Request) {
     }
 
     // Validate CONTACT_EMAIL format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(CONTACT_EMAIL)) {
       console.error('❌ Invalid CONTACT_EMAIL format:', CONTACT_EMAIL)
       return NextResponse.json(
