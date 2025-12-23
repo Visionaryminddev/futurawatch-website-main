@@ -123,11 +123,20 @@ export function TrustpilotWidget({
                 const hasContent = widgetRef.current.children.length > 1 || iframe
                 if (!hasContent) {
                   console.warn('⚠️ Widget container appears empty after initialization')
+                  console.warn('⚠️ This might indicate a 403 error or missing reviews')
+                  setLoadError(true)
                 } else {
                   console.log('✅ Widget content detected')
+                  // Check if iframe loaded successfully
+                  if (iframe) {
+                    iframe.onerror = () => {
+                      console.error('❌ Widget iframe failed to load')
+                      setLoadError(true)
+                    }
+                  }
                 }
               }
-            }, 2000)
+            }, 3000)
           } catch (initError) {
             console.error('❌ Error calling loadFromElement:', initError)
             setLoadError(true)
@@ -159,35 +168,41 @@ export function TrustpilotWidget({
     return (
       <div className={`trustpilot-widget-fallback ${className}`} style={{ minHeight: styleHeight, width: styleWidth }}>
         <div className="flex flex-col items-center justify-center p-4 text-gray-400">
-          <p className="text-sm mb-2">Trustpilot reviews</p>
+          <p className="text-sm mb-2">Trusted by Thousands</p>
+          <p className="text-xs mb-3 text-gray-500">See what our customers are saying</p>
           <a 
             href="https://nl.trustpilot.com/review/futurawatch.com" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-yellow-500 hover:text-yellow-400 underline"
+            className="text-yellow-500 hover:text-yellow-400 underline text-sm"
           >
-            View reviews on Trustpilot
+            View reviews on Trustpilot →
           </a>
         </div>
       </div>
     )
   }
 
+  // Build props object with only defined data attributes
+  const divProps: any = {
+    ref: widgetRef,
+    className: `trustpilot-widget ${className}`,
+    style: { minHeight: styleHeight, width: styleWidth },
+    'data-locale': locale || 'nl-NL',
+    'data-template-id': templateId,
+    'data-businessunit-id': businessunitId,
+    'data-style-height': styleHeight || '140px',
+    'data-style-width': styleWidth || '100%',
+  }
+
+  // Only add optional attributes if they are defined
+  if (theme) divProps['data-theme'] = theme
+  if (stars) divProps['data-stars'] = stars
+  if (fontFamily) divProps['data-font-family'] = fontFamily
+  if (token) divProps['data-token'] = token
+
   return (
-    <div
-      ref={widgetRef}
-      className={`trustpilot-widget ${className}`}
-      style={{ minHeight: styleHeight, width: styleWidth }}
-      data-locale={locale}
-      data-template-id={templateId}
-      data-businessunit-id={businessunitId}
-      data-style-height={styleHeight}
-      data-style-width={styleWidth}
-      data-theme={theme}
-      data-stars={stars}
-      data-font-family={fontFamily}
-      data-token={token}
-    >
+    <div {...divProps}>
       <a href="https://nl.trustpilot.com/review/futurawatch.com" target="_blank" rel="noopener noreferrer">
         Trustpilot
       </a>
