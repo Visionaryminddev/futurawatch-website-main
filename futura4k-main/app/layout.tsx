@@ -65,7 +65,7 @@ export default function RootLayout({
         <script
           type="text/javascript"
           src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-          defer
+          async
         />
         {/* End TrustBox script */}
       </head>

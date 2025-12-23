@@ -219,11 +219,10 @@ export default function HomePage() {
             <TrustpilotWidget
               templateId="56278e9abfbbba0bdcd568bc"
               businessunitId="694992481d2da56aaca4b6df"
-              locale="nl-NL"
-              styleHeight="500px"
+              locale="en-US"
+              styleHeight="52px"
               styleWidth="100%"
-              theme="dark"
-              token="bd63ea16-50e7-490e-8b53-4d764e4db7b7"
+              token="8f4f4304-74d6-40ad-a267-48df37e9f003"
             />
           </div>
         </div>
